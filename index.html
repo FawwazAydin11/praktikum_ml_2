@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praktikum Pembelajaran Mesin - SVM, Decision Tree, Random Forest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-nav">
+    <div class="top-nav-inner">
+      <a href="#pengantar">Pengantar</a>
+      <a href="#model">Teori & Demo</a>
+      <a href="#perbandingan">Perbandingan</a>
+      <a href="#evaluasi">Evaluasi</a>
+      <a href="#penutup">Penutup</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-badge">Pendamping praktikum pembelajaran mesin</div>
+      <h1>SVM, Decision Tree, dan Random Forest dengan penjelasan yang mudah dipahami</h1>
+      <p>
+        Website ini disusun mengikuti pembahasan materi presentasi: dimulai dari pengertian, konsep inti, parameter utama, kelebihan dan kekurangan, lalu diikuti demo interaktif sederhana. Tujuannya agar mahasiswa tidak hanya tahu nama algoritmanya, tetapi juga benar-benar paham bagaimana cara berpikir modelnya.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge">Bahasa sederhana</span>
+        <span class="hero-badge">Teori lengkap</span>
+        <span class="hero-badge">Contoh interaktif</span>
+        <span class="hero-badge">Cocok untuk praktikum</span>
+      </div>
+    </section>
+
+    <section class="section" id="pengantar">
+      <h2 class="section-title">1. Pengantar: sebenarnya kita sedang menyelesaikan masalah apa?</h2>
+      <p class="section-desc">
+        Pada praktikum ini, model diminta mengenali jenis bunga Iris dari ciri-ciri yang dimiliki bunga tersebut. Jadi, komputer menerima beberapa informasi, misalnya panjang dan lebar kelopak, lalu model mencoba menebak kelasnya: Setosa, Versicolor, atau Virginica.
+      </p>
+
+      <div class="grid grid-3" style="margin-top:18px;">
+        <div class="card">
+          <h3 class="mini-title">Setosa</h3>
+          <p>Biasanya kelas ini paling mudah dibedakan karena ciri petalnya cukup berbeda dari kelas lain.</p>
+          <span class="pill">Mudah dipisahkan</span>
+          <span class="pill">Sering jadi contoh awal</span>
+        </div>
+        <div class="card">
+          <h3 class="mini-title">Versicolor</h3>
+          <p>Kelas ini sering berada di tengah-tengah, sehingga terkadang mirip dengan Virginica.</p>
+          <span class="pill">Nilai menengah</span>
+          <span class="pill">Butuh model teliti</span>
+        </div>
+        <div class="card">
+          <h3 class="mini-title">Virginica</h3>
+          <p>Biasanya memiliki ukuran petal yang lebih besar, tetapi beberapa data bisa dekat dengan Versicolor.</p>
+          <span class="pill">Petal lebih besar</span>
+          <span class="pill">Kadang ambigu</span>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <b>Intuisi penting untuk mahasiswa:</b> ketiga algoritma yang dipelajari di sini sama-sama bertujuan mengklasifikasikan data, tetapi cara mereka mengambil keputusan berbeda. SVM memikirkan batas pemisah terbaik, Decision Tree memikirkan aturan bertahap, sedangkan Random Forest menggabungkan banyak aturan agar hasilnya lebih stabil.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid grid-2">
+        <div class="dark-card">
+          <h3 style="margin-top:0;">Urutan penjelasan yang enak dipakai saat ngajar</h3>
+          <div class="steps">
+            <div class="step"><div class="step-number">1</div><div>Mulai dari masalah klasifikasi bunga agar mahasiswa paham konteksnya dulu.</div></div>
+            <div class="step"><div class="step-number">2</div><div>Masuk ke pengertian model dengan bahasa sehari-hari, bukan langsung istilah teknis.</div></div>
+            <div class="step"><div class="step-number">3</div><div>Baru jelaskan konsep inti dan parameter utama satu per satu.</div></div>
+            <div class="step"><div class="step-number">4</div><div>Gunakan demo interaktif agar mahasiswa melihat bagaimana keputusan model berubah.</div></div>
+            <div class="step"><div class="step-number">5</div><div>Tutup dengan evaluasi model supaya mereka bisa membaca hasil praktikum dengan benar.</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="mini-title">Istilah dasar yang perlu disamakan dulu</h3>
+          <ul class="clean">
+            <li><b>Fitur</b> = informasi yang dipakai model, misalnya panjang petal.</li>
+            <li><b>Kelas</b> = label jawaban, misalnya Setosa atau Virginica.</li>
+            <li><b>Training</b> = proses model belajar dari data yang sudah punya jawaban.</li>
+            <li><b>Testing</b> = proses mengecek apakah model bisa menebak data baru dengan benar.</li>
+            <li><b>Prediksi</b> = jawaban yang dihasilkan model untuk suatu data.</li>
+          </ul>
+          <div class="highlight">
+            Saat mengajar, tekankan bahwa model machine learning bukan menghafal jawaban satu per satu, tetapi belajar pola dari data.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="model">
+      <h2 class="section-title">2. Teori dan demo interaktif tiap model</h2>
+      <p class="section-desc">
+        Bagian ini dibuat mengikuti pembahasan materi presentasi: pengertian model, konsep utamanya, parameter utamanya, kelebihan dan kekurangannya, lalu contoh demo sederhana yang bisa langsung kamu pakai saat menjelaskan.
+      </p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="svm">Support Vector Machine</button>
+        <button class="tab" data-tab="tree">Decision Tree</button>
+        <button class="tab" data-tab="forest">Random Forest</button>
+      </div>
+
+      <div id="svm" class="tab-content card">
+        <h3 style="margin-top:0;">Support Vector Machine (SVM)</h3>
+        <p>
+          SVM adalah algoritma klasifikasi yang bekerja dengan mencari <b>hyperplane</b> terbaik untuk memisahkan data dari kelas yang berbeda. Kalau datanya dua dimensi, hyperplane bisa dibayangkan sebagai sebuah garis. Kalau dimensinya lebih tinggi, bentuknya menjadi bidang atau pemisah yang lebih umum.
+        </p>
+        <p>
+          Tujuan utama SVM bukan hanya memisahkan data, tetapi mencari pemisah yang memiliki <b>margin</b> paling besar. Margin adalah jarak antara batas keputusan dengan titik data terdekat dari masing-masing kelas. Titik-titik yang paling dekat dengan batas ini disebut <b>support vectors</b>.
+        </p>
+
+        <div class="grid grid-2" style="margin-top:16px;">
+          <div class="small-card">
+            <h4 class="mini-title">Penjelasan sangat sederhana</h4>
+            <p>Bayangkan ada dua kelompok titik di papan. Tugas SVM adalah menarik garis pemisah di antara dua kelompok itu.</p>
+            <p>Tetapi SVM tidak asal menarik garis. Ia mencari garis yang memberi jarak aman paling lebar dari kedua kelompok. Jadi, garis yang dipilih benar-benar dianggap paling aman untuk memisahkan dua kelas.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Kenapa margin penting?</h4>
+            <p>Karena margin yang lebar biasanya membuat model lebih baik saat menghadapi data baru. Secara intuitif, model tidak terlalu mepet ke salah satu kelas, sehingga pemisahnya lebih aman.</p>
+          </div>
+        </div>
+
+        <div class="demo-box">
+          <h4 style="margin-top:0;">Demo intuitif SVM</h4>
+          <p style="margin-top:0; color:#475569;">Demo ini bukan perhitungan asli, tetapi ilustrasi visual agar mahasiswa paham pengaruh kernel, C, dan gamma.</p>
+
+          <div class="demo-canvas">
+            <svg id="svmSvg" viewBox="0 0 360 220" width="100%" height="220" aria-label="Demo SVM">
+              <rect x="0" y="0" width="360" height="220" fill="#ffffff"></rect>
+              <g id="svmBlue"></g>
+              <g id="svmPink"></g>
+              <path id="svmBoundary" d="" fill="none" stroke="#0f172a" stroke-width="4" stroke-linecap="round"></path>
+              <path id="svmMargin1" d="" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"></path>
+              <path id="svmMargin2" d="" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"></path>
+              <text x="18" y="20" fill="#64748b" font-size="12">Kelas A</text>
+              <text x="295" y="20" fill="#64748b" font-size="12">Kelas B</text>
+              <text x="135" y="110" fill="#334155" font-size="11">Batas keputusan</text>
+            </svg>
+            <div class="legend">
+              <span><span class="dot" style="background:#3b82f6"></span>Titik kelas A</span>
+              <span><span class="sq" style="background:#ec4899"></span>Titik kelas B</span>
+              <span>Garis hitam = hyperplane</span>
+              <span>Garis putus-putus = margin</span>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div>
+              <label>Kernel</label>
+              <select id="svmKernel">
+                <option value="linear">Linear</option>
+                <option value="poly">Polynomial</option>
+                <option value="rbf" selected>RBF</option>
+              </select>
+            </div>
+            <div>
+              <label>Nilai C: <span id="cValue">50</span></label>
+              <input id="svmC" type="range" min="0" max="100" value="50" />
+            </div>
+            <div>
+              <label>Nilai Gamma: <span id="gValue">40</span></label>
+              <input id="svmGamma" type="range" min="0" max="100" value="40" />
+            </div>
+          </div>
+
+          <div class="result" id="svmResult"></div>
+        </div>
+
+        <div class="grid grid-4" style="margin-top:18px;">
+          <div class="small-card">
+            <h4 class="mini-title">Kernel</h4>
+            <p>Kernel menentukan bentuk pemisah. Linear cocok untuk pemisahan garis lurus. Poly dan RBF membantu saat pola data lebih melengkung.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Gamma</h4>
+            <p>Gamma mengatur seberapa jauh pengaruh satu titik data. Nilai besar membuat batas lebih sensitif terhadap pola di sekitar titik.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Regularization (C)</h4>
+            <p>C mengatur seberapa ketat model terhadap kesalahan klasifikasi di data latihan. C besar cenderung lebih ketat.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Degree</h4>
+            <p>Degree dipakai jika kernel polynomial digunakan. Nilainya memengaruhi tingkat kelengkungan atau kompleksitas pemisah.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:18px;">
+          <div class="card" style="padding:18px;">
+            <h4 class="mini-title">Kelebihan SVM</h4>
+            <ul class="clean">
+              <li>Mencari margin maksimal sehingga sering punya kemampuan generalisasi yang baik.</li>
+              <li>Bisa menangani data non-linier dengan bantuan kernel.</li>
+              <li>Sering bekerja baik pada dataset yang tidak terlalu besar.</li>
+              <li>Efektif pada data berdimensi tinggi.</li>
+            </ul>
+          </div>
+          <div class="card" style="padding:18px;">
+            <h4 class="mini-title">Kekurangan SVM</h4>
+            <ul class="clean">
+              <li>Bisa lambat untuk dataset besar.</li>
+              <li>Parameter seperti C, gamma, dan kernel perlu dipilih dengan hati-hati.</li>
+              <li>Tidak selalu mudah dijelaskan secara intuitif, terutama jika memakai kernel non-linier.</li>
+              <li>Probabilitas kelas tidak muncul secara langsung tanpa pengaturan tambahan.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="tree" class="tab-content card hidden">
+        <h3 style="margin-top:0;">Decision Tree</h3>
+        <p>
+          Decision Tree adalah algoritma yang membuat keputusan secara bertahap seperti pohon. Model ini membagi data berdasarkan pertanyaan-pertanyaan sederhana. Karena bentuknya bercabang, algoritma ini sering menjadi salah satu yang paling mudah dijelaskan kepada pemula.
+        </p>
+        <p>
+          Struktur dasarnya terdiri dari tiga bagian utama: <b>root node</b> sebagai titik awal, <b>decision node</b> sebagai tempat munculnya pertanyaan, dan <b>leaf node</b> sebagai hasil akhir keputusan.
+        </p>
+
+        <div class="grid grid-3" style="margin-top:16px;">
+          <div class="small-card">
+            <h4 class="mini-title">Root node</h4>
+            <p>Ini adalah awal pohon. Semua data masih berkumpul di sini sebelum dibagi.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Decision node</h4>
+            <p>Di sini model bertanya sesuatu, misalnya apakah petal length lebih kecil dari batas tertentu.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Leaf node</h4>
+            <p>Ini adalah ujung cabang. Di sinilah keputusan akhirnya muncul, misalnya kelas Setosa.</p>
+          </div>
+        </div>
+
+        <div class="demo-box">
+          <h4 style="margin-top:0;">Demo alur keputusan Decision Tree</h4>
+          <p style="margin-top:0; color:#475569;">Demo ini menunjukkan bagaimana satu data bisa melewati cabang demi cabang sampai akhirnya masuk ke satu kelas.</p>
+          <div class="controls">
+            <div>
+              <label>Petal Length</label>
+              <select id="petalLength">
+                <option value="pendek">Pendek</option>
+                <option value="sedang" selected>Sedang</option>
+                <option value="panjang">Panjang</option>
+              </select>
+            </div>
+            <div>
+              <label>Petal Width</label>
+              <select id="petalWidth">
+                <option value="sempit">Sempit</option>
+                <option value="sedang" selected>Sedang</option>
+                <option value="lebar">Lebar</option>
+              </select>
+            </div>
+            <div>
+              <label>Kedalaman pohon (simulasi): <span id="depthValue">3</span></label>
+              <input id="treeDepth" type="range" min="1" max="5" value="3" />
+            </div>
+          </div>
+          <div class="tree-flow" id="treeFlow"></div>
+          <div class="result" id="treeResult"></div>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:18px;">
+          <div class="small-card">
+            <h4 class="mini-title">Criterion</h4>
+            <p>Ini adalah cara model menilai split terbaik. Secara sederhana, model mencari pembagian yang membuat kelas menjadi lebih rapi.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">max_depth</h4>
+            <p>Mengatur seberapa dalam pohon boleh tumbuh. Semakin dalam, aturan makin detail, tetapi risiko overfitting juga naik.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">min_samples_split</h4>
+            <p>Jumlah minimum data agar node boleh dipecah lagi menjadi cabang baru.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">min_samples_leaf</h4>
+            <p>Jumlah minimum data yang harus tersisa di leaf. Ini membantu agar daun tidak terlalu kecil.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">max_features</h4>
+            <p>Berapa banyak fitur yang dipertimbangkan saat model mencari split terbaik.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Splitter</h4>
+            <p>Menentukan cara pencarian split, apakah memilih split terbaik atau strategi lainnya.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:18px;">
+          <div class="card" style="padding:18px;">
+            <h4 class="mini-title">Kelebihan Decision Tree</h4>
+            <ul class="clean">
+              <li>Mudah dipahami karena bentuknya seperti aturan if-else.</li>
+              <li>Mudah divisualisasikan dan cocok untuk penjelasan dasar machine learning.</li>
+              <li>Tidak harus selalu melakukan standardisasi data.</li>
+            </ul>
+          </div>
+          <div class="card" style="padding:18px;">
+            <h4 class="mini-title">Kekurangan Decision Tree</h4>
+            <ul class="clean">
+              <li>Mudah overfitting jika pohon terlalu dalam.</li>
+              <li>Perubahan kecil pada data bisa mengubah struktur pohon cukup besar.</li>
+              <li>Sering kurang stabil dibanding model ensemble.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="forest" class="tab-content card hidden">
+        <h3 style="margin-top:0;">Random Forest</h3>
+        <p>
+          Random Forest adalah algoritma ensemble learning yang menggabungkan banyak Decision Tree. Setiap pohon dilatih dengan sebagian data dan sebagian fitur secara acak. Setelah itu, semua pohon memberikan prediksi, lalu hasil akhir dipilih berdasarkan <b>voting</b>.
+        </p>
+        <p>
+          Intinya, kalau satu Decision Tree seperti satu orang yang memberi pendapat, maka Random Forest seperti meminta pendapat dari banyak orang, lalu mengambil jawaban yang paling banyak disetujui.
+        </p>
+
+        <div class="grid grid-2" style="margin-top:16px;">
+          <div class="small-card">
+            <h4 class="mini-title">Kenapa dibuat banyak tree?</h4>
+            <p>Karena satu Decision Tree saja bisa terlalu mengikuti data latihan. Dengan menggabungkan banyak tree, hasil akhir biasanya lebih stabil dan tidak terlalu mudah overfitting.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">Intuisi voting</h4>
+            <p>Kalau 5 tree memberi jawaban dan 3 di antaranya memilih kelas yang sama, maka kelas itulah yang menjadi prediksi akhir Random Forest.</p>
+          </div>
+        </div>
+
+        <div class="demo-box">
+          <h4 style="margin-top:0;">Demo voting Random Forest</h4>
+          <p style="margin-top:0; color:#475569;">Silakan ubah tingkat kesulitan data dan jumlah pohon untuk melihat bagaimana hasil voting berubah.</p>
+          <div class="controls">
+            <div>
+              <label>Tingkat kesulitan data</label>
+              <select id="forestSample">
+                <option value="mudah">Mudah</option>
+                <option value="sedang" selected>Sedang</option>
+                <option value="sulit">Sulit / ambigu</option>
+              </select>
+            </div>
+            <div>
+              <label>Jumlah pohon (simulasi): <span id="forestTreesValue">5</span></label>
+              <input id="forestTrees" type="range" min="3" max="9" step="2" value="5" />
+            </div>
+          </div>
+          <div class="vote-grid" id="forestVotes"></div>
+          <div class="result" id="forestResult"></div>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:18px;">
+          <div class="small-card">
+            <h4 class="mini-title">n_estimators</h4>
+            <p>Jumlah pohon yang digunakan. Semakin banyak, biasanya hasil lebih stabil, tetapi komputasi juga bertambah.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">max_depth</h4>
+            <p>Mengatur kedalaman tiap pohon. Tetap penting agar pohon tidak terlalu berlebihan.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">min_samples_split</h4>
+            <p>Jumlah minimum data agar node pada tiap tree boleh dipecah lagi.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">min_samples_leaf</h4>
+            <p>Jumlah minimum data di daun. Membantu hasil tree tidak terlalu ekstrem.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">max_features</h4>
+            <p>Jumlah fitur acak yang dilihat setiap tree saat mencari split terbaik.</p>
+          </div>
+          <div class="small-card">
+            <h4 class="mini-title">bootstrap</h4>
+            <p>Menentukan apakah data untuk tiap tree diambil secara sampling dengan pengembalian. Ini membuat tiap tree belajar dari versi data yang sedikit berbeda.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:18px;">
+          <div class="card" style="padding:18px;">
+            <h4 class="mini-title">Kelebihan Random Forest</h4>
+            <ul class="clean">
+              <li>Biasanya lebih stabil daripada satu Decision Tree.</li>
+              <li>Lebih tahan terhadap overfitting dibanding pohon tunggal.</li>
+              <li>Sering memberi performa yang baik tanpa terlalu banyak tuning rumit.</li>
+            </ul>
+          </div>
+          <div class="card" style="padding:18px;">
+            <h4 class="mini-title">Kekurangan Random Forest</h4>
+            <ul class="clean">
+              <li>Lebih berat dibanding satu pohon keputusan.</li>
+              <li>Lebih sulit dijelaskan detailnya daripada Decision Tree tunggal.</li>
+              <li>Kalau pohonnya terlalu banyak, model bisa makin lambat.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="perbandingan">
+      <h2 class="section-title">3. Perbandingan singkat tiga model</h2>
+      <p class="section-desc">Setelah semua teori dan demo dibahas, bagian ini bisa dipakai sebagai ringkasan agar mahasiswa melihat perbedaannya secara cepat.</p>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Aspek</th>
+            <th>SVM</th>
+            <th>Decision Tree</th>
+            <th>Random Forest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Ide utama</b></td>
+            <td>Mencari hyperplane terbaik dengan margin maksimum</td>
+            <td>Membuat keputusan bercabang dari akar ke daun</td>
+            <td>Menggabungkan banyak tree dan memakai voting</td>
+          </tr>
+          <tr>
+            <td><b>Paling mudah dibayangkan sebagai</b></td>
+            <td>Garis pemisah antar kelompok data</td>
+            <td>Serangkaian pertanyaan if-else</td>
+            <td>Rapat banyak tree untuk memilih jawaban</td>
+          </tr>
+          <tr>
+            <td><b>Kelebihan utama</b></td>
+            <td>Kuat pada margin dan bisa menangani data non-linier</td>
+            <td>Sangat mudah dijelaskan</td>
+            <td>Lebih stabil dan lebih tahan overfitting</td>
+          </tr>
+          <tr>
+            <td><b>Kekurangan utama</b></td>
+            <td>Perlu tuning parameter</td>
+            <td>Mudah overfitting</td>
+            <td>Lebih berat dan kurang transparan daripada satu tree</td>
+          </tr>
+          <tr>
+            <td><b>Cocok untuk penjelasan awal?</b></td>
+            <td>Cukup, tetapi konsep margin perlu waktu</td>
+            <td>Sangat cocok</td>
+            <td>Cocok setelah mahasiswa paham Decision Tree</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="evaluasi">
+      <h2 class="section-title">4. Cara membaca hasil evaluasi model</h2>
+      <p class="section-desc">
+        Setelah model dijalankan, mahasiswa akan melihat angka-angka seperti accuracy, precision, recall, F1-score, dan confusion matrix. Bagian ini membantu mereka memahami arti angka tersebut dengan bahasa sederhana.
+      </p>
+
+      <div class="grid grid-2" style="margin-top:18px;">
+        <div class="card">
+          <h3 class="mini-title">Istilah evaluasi</h3>
+          <ul class="clean">
+            <li><b>Accuracy</b> = persentase seluruh prediksi yang benar.</li>
+            <li><b>Precision</b> = dari semua data yang diprediksi sebagai suatu kelas, berapa yang benar-benar tepat.</li>
+            <li><b>Recall</b> = dari semua data yang memang milik suatu kelas, berapa yang berhasil ditemukan model.</li>
+            <li><b>F1-score</b> = ukuran keseimbangan antara precision dan recall.</li>
+          </ul>
+          <div class="highlight">
+            Penjelasan cepat yang mudah: accuracy melihat benar secara keseluruhan, precision melihat ketepatan saat model menebak, recall melihat kelengkapan saat model mencari suatu kelas.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="mini-title">Confusion Matrix sederhana</h3>
+          <div class="cm">
+            <div></div>
+            <div class="head">Pred Setosa</div>
+            <div class="head">Pred Versicolor</div>
+            <div class="head">Pred Virginica</div>
+
+            <div class="head">Akt Setosa</div>
+            <div class="diag">10</div>
+            <div>0</div>
+            <div>0</div>
+
+            <div class="head">Akt Versicolor</div>
+            <div>0</div>
+            <div class="diag">9</div>
+            <div>0</div>
+
+            <div class="head">Akt Virginica</div>
+            <div>0</div>
+            <div>0</div>
+            <div class="diag">11</div>
+          </div>
+          <p style="margin-top:14px; color:#475569;">
+            Angka di diagonal menunjukkan prediksi yang benar. Jika ada angka di luar diagonal, berarti model tertukar saat mengenali kelas tertentu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-note" id="penutup">
+      <h2 style="margin-top:0;">Ringkasan penutup untuk disampaikan ke mahasiswa</h2>
+      <p>
+        SVM fokus mencari batas pemisah terbaik, Decision Tree fokus pada aturan keputusan bertahap, dan Random Forest fokus pada penggabungan banyak keputusan agar hasilnya lebih stabil. Ketiganya sama-sama bisa dipakai untuk klasifikasi, tetapi cara berpikirnya berbeda. Kalau mahasiswa sudah paham intuisi ini, maka saat masuk ke kode dan hasil evaluasi, mereka akan jauh lebih mudah mengikuti praktikum.
+      </p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
