@@ -11,9 +11,12 @@ const pinkGroup = document.getElementById('svmPink');
 const svmKernel = document.getElementById('svmKernel');
 const svmC = document.getElementById('svmC');
 const svmGamma = document.getElementById('svmGamma');
+const svmDegree = document.getElementById('svmDegree');
+const degreeControl = document.getElementById('degreeControl');
 const svmResult = document.getElementById('svmResult');
 const cValue = document.getElementById('cValue');
 const gValue = document.getElementById('gValue');
+const degreeValue = document.getElementById('degreeValue');
 const svmBoundary = document.getElementById('svmBoundary');
 const svmMargin1 = document.getElementById('svmMargin1');
 const svmMargin2 = document.getElementById('svmMargin2');
@@ -21,8 +24,6 @@ const presetButtons = document.querySelectorAll('[data-svm-preset]');
 
 const petalLength = document.getElementById('petalLength');
 const petalWidth = document.getElementById('petalWidth');
-const treeDepth = document.getElementById('treeDepth');
-const depthValue = document.getElementById('depthValue');
 const treeDiagram = document.getElementById('treeDiagram');
 const treeFlow = document.getElementById('treeFlow');
 const treeResult = document.getElementById('treeResult');
@@ -35,6 +36,8 @@ const forestSummary = document.getElementById('forestSummary');
 const forestResult = document.getElementById('forestResult');
 
 function drawInitialPoints() {
+  if (!blueGroup || !pinkGroup) return;
+
   bluePoints.forEach(([x, y]) => {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circle.setAttribute('cx', x);
@@ -64,8 +67,11 @@ function getLinearPath(offset = 0) {
   return `M ${185 + offset} 16 L ${170 + offset} 204`;
 }
 
-function getPolyPath(offset = 0) {
-  return `M ${194 + offset} 16 C ${178 + offset} 54, ${168 + offset} 94, ${152 + offset} 138 C ${146 + offset} 160, ${138 + offset} 182, ${126 + offset} 204`;
+function getPolyPath(offset = 0, degree = 3) {
+  const topBend = clamp(192 - degree * 4, 162, 188);
+  const midBend = clamp(154 - degree * 5, 112, 148);
+  const lowBend = clamp(136 - degree * 4, 96, 132);
+  return `M ${198 + offset} 16 C ${topBend + offset} 42, ${midBend + offset} 88, ${152 + offset} 132 C ${lowBend + offset} 158, ${132 + offset} 182, ${118 + offset} 204`;
 }
 
 function getRbfPath(offset = 0, gamma = 40) {
@@ -75,13 +81,23 @@ function getRbfPath(offset = 0, gamma = 40) {
   return `M ${208 + offset} 16 C ${156 + offset} ${curve1}, ${206 + offset} ${curve2}, ${166 + offset} 126 C ${146 + offset} ${curve3}, ${140 + offset} 182, ${126 + offset} 204`;
 }
 
+function updateDegreeVisibility() {
+  if (!svmKernel || !degreeControl) return;
+  degreeControl.style.display = svmKernel.value === 'poly' ? 'block' : 'none';
+}
+
 function updateSVM() {
+  if (!svmKernel || !svmC || !svmGamma || !svmBoundary || !svmMargin1 || !svmMargin2) return;
+
   const kernel = svmKernel.value;
   const c = Number(svmC.value);
   const gamma = Number(svmGamma.value);
+  const degree = Number(svmDegree ? svmDegree.value : 3);
 
-  cValue.textContent = c;
-  gValue.textContent = gamma;
+  if (cValue) cValue.textContent = c;
+  if (gValue) gValue.textContent = gamma;
+  if (degreeValue) degreeValue.textContent = degree;
+  updateDegreeVisibility();
 
   let mainPath = '';
   let kernelText = '';
@@ -90,8 +106,8 @@ function updateSVM() {
     mainPath = getLinearPath(0);
     kernelText = 'Kernel linear cocok saat data relatif bisa dipisahkan dengan garis lurus.';
   } else if (kernel === 'poly') {
-    mainPath = getPolyPath(0);
-    kernelText = 'Kernel polynomial membuat batas keputusan lebih melengkung daripada linear.';
+    mainPath = getPolyPath(0, degree);
+    kernelText = 'Kernel polynomial membuat batas keputusan lebih melengkung daripada linear. Degree menentukan seberapa kompleks lengkungannya.';
   } else {
     mainPath = getRbfPath(0, gamma);
     kernelText = 'Kernel RBF sangat fleksibel dan sering dipakai saat pola data tidak linier.';
@@ -105,8 +121,8 @@ function updateSVM() {
     marginPath1 = getLinearPath(marginShift);
     marginPath2 = getLinearPath(-marginShift);
   } else if (kernel === 'poly') {
-    marginPath1 = getPolyPath(marginShift);
-    marginPath2 = getPolyPath(-marginShift);
+    marginPath1 = getPolyPath(marginShift, degree);
+    marginPath2 = getPolyPath(-marginShift, degree);
   } else {
     marginPath1 = getRbfPath(marginShift, gamma);
     marginPath2 = getRbfPath(-marginShift, gamma);
@@ -128,36 +144,55 @@ function updateSVM() {
     ? 'Gamma sedang membuat model cukup fleksibel mengikuti pola data.'
     : 'Gamma tinggi membuat model sangat sensitif terhadap pola di sekitar titik data.';
 
-  svmResult.innerHTML = `
-    <strong>Apa yang sedang terjadi?</strong><br>
-    ${kernelText}<br>
-    ${cText}<br>
-    ${gammaText}<br><br>
-    <strong>Inti yang perlu dipahami:</strong> walaupun parameternya berubah, tujuan SVM tetap sama, yaitu mencari batas pemisah yang paling baik antar kelas.
-  `;
+  const degreeText = kernel === 'poly'
+    ? `<br>Degree saat ini adalah ${degree}. Semakin tinggi degree, kurva polynomial bisa menjadi semakin kompleks.`
+    : '';
+
+  if (svmResult) {
+    svmResult.innerHTML = `
+      <strong>Apa yang sedang terjadi?</strong><br>
+      ${kernelText}<br>
+      ${cText}<br>
+      ${gammaText}${degreeText}<br><br>
+      <strong>Inti yang perlu dipahami:</strong> walaupun parameternya berubah, tujuan SVM tetap sama, yaitu mencari batas pemisah yang paling baik antar kelas.
+    `;
+  }
 }
 
 function setSvmPreset(type) {
+  if (!svmKernel || !svmC || !svmGamma) return;
+
   if (type === 'linear') {
     svmKernel.value = 'linear';
     svmC.value = '55';
     svmGamma.value = '20';
+    if (svmDegree) svmDegree.value = '3';
+  } else if (type === 'poly') {
+    svmKernel.value = 'poly';
+    svmC.value = '60';
+    svmGamma.value = '35';
+    if (svmDegree) svmDegree.value = '4';
   } else if (type === 'rbf-soft') {
     svmKernel.value = 'rbf';
     svmC.value = '30';
     svmGamma.value = '25';
+    if (svmDegree) svmDegree.value = '3';
   } else if (type === 'rbf-tight') {
     svmKernel.value = 'rbf';
     svmC.value = '85';
     svmGamma.value = '80';
+    if (svmDegree) svmDegree.value = '3';
   }
+
   updateSVM();
 }
 
 function buildTreeDiagram(prediction, width) {
-  const leftLeafActive = prediction === 'Setosa';
-  const centerLeafActive = prediction === 'Versicolor';
-  const rightLeafActive = prediction === 'Virginica';
+  if (!treeDiagram) return;
+
+  const setosaActive = prediction === 'Setosa';
+  const versicolorActive = prediction === 'Versicolor';
+  const virginicaActive = prediction === 'Virginica';
   const rightBranchActive = prediction !== 'Setosa';
   const wideActive = width === 'lebar' && rightBranchActive;
   const notWideActive = width !== 'lebar' && rightBranchActive;
@@ -166,28 +201,26 @@ function buildTreeDiagram(prediction, width) {
     <div class="tree-visual-root active">Root: semua data</div>
     <div class="tree-helper">Pertanyaan 1: apakah petal length pendek?</div>
     <div class="tree-visual-row two">
-      <div class="tree-visual-node ${leftLeafActive ? 'active' : ''}">Ya</div>
+      <div class="tree-visual-node ${setosaActive ? 'active' : ''}">Ya</div>
       <div class="tree-visual-node ${rightBranchActive ? 'active' : ''}">Tidak</div>
     </div>
     <div class="tree-visual-row two">
-      <div class="tree-visual-leaf ${leftLeafActive ? 'active' : ''}">Leaf: Setosa</div>
+      <div class="tree-visual-leaf ${setosaActive ? 'active' : ''}">Leaf: Setosa</div>
       <div class="tree-visual-node ${rightBranchActive ? 'active' : ''}">Pertanyaan 2: apakah petal width lebar?</div>
     </div>
     <div class="tree-visual-row two">
-      <div class="tree-visual-leaf ${centerLeafActive ? 'active' : ''}">Tidak → Versicolor</div>
-      <div class="tree-visual-leaf ${rightLeafActive ? 'active' : ''}">Ya → Virginica</div>
+      <div class="tree-visual-leaf ${notWideActive ? 'active' : ''}">Tidak → Versicolor</div>
+      <div class="tree-visual-leaf ${wideActive ? 'active' : ''}">Ya → Virginica</div>
     </div>
     <div class="tree-helper">Cabang yang aktif akan diberi sorotan.</div>
   `;
 }
 
 function updateTree() {
+  if (!petalLength || !petalWidth) return;
+
   const length = petalLength.value;
   const width = petalWidth.value;
-  const depth = Number(treeDepth.value);
-
-  depthValue.textContent = depth;
-
   const steps = ['Root node: semua data mulai dari sini'];
   let prediction = '';
   let explanation = '';
@@ -209,19 +242,17 @@ function updateTree() {
     }
   }
 
-  if (depth <= 2) {
-    explanation += ' Kedalaman pohon rendah membuat aturan lebih sederhana.';
-  } else if (depth >= 4) {
-    explanation += ' Kedalaman pohon yang lebih besar membuat aturan lebih rinci, tetapi juga meningkatkan risiko overfitting.';
-  } else {
-    explanation += ' Kedalaman sedang biasanya cukup seimbang untuk memahami alur keputusan.';
+  if (treeFlow) {
+    treeFlow.innerHTML = steps.map(step => `<div class="tree-node">${step}</div>`).join('');
   }
 
-  treeFlow.innerHTML = steps.map(step => `<div class="tree-node">${step}</div>`).join('');
-  treeResult.innerHTML = `
-    <strong>Prediksi akhir:</strong> ${prediction}<br>
-    ${explanation}
-  `;
+  if (treeResult) {
+    treeResult.innerHTML = `
+      <strong>Prediksi akhir:</strong> ${prediction}<br>
+      ${explanation}<br><br>
+      <strong>Inti yang perlu dipahami:</strong> Decision Tree bekerja seperti aturan if-else. Data bergerak dari root node, melewati decision node, lalu berakhir di leaf node.
+    `;
+  }
 
   buildTreeDiagram(prediction, width);
 }
@@ -236,6 +267,8 @@ function generateVotes(sample, numTrees) {
 }
 
 function renderVoteSummary(counts, total) {
+  if (!forestSummary) return;
+
   const classes = ['Setosa', 'Versicolor', 'Virginica'];
   const classMap = {
     Setosa: 'setosa',
@@ -261,18 +294,23 @@ function renderVoteSummary(counts, total) {
 }
 
 function updateForest() {
+  if (!forestSample || !forestTrees) return;
+
   const sample = forestSample.value;
   const numTrees = Number(forestTrees.value);
 
-  forestTreesValue.textContent = numTrees;
+  if (forestTreesValue) forestTreesValue.textContent = numTrees;
 
   const votes = generateVotes(sample, numTrees);
-  forestVotes.innerHTML = votes.map((vote, index) => `
-    <div class="vote-box">
-      <strong>Tree ${index + 1}</strong><br>
-      ${vote}
-    </div>
-  `).join('');
+
+  if (forestVotes) {
+    forestVotes.innerHTML = votes.map((vote, index) => `
+      <div class="vote-box">
+        <strong>Tree ${index + 1}</strong><br>
+        ${vote}
+      </div>
+    `).join('');
+  }
 
   const counts = {};
   votes.forEach(vote => {
@@ -292,11 +330,13 @@ function updateForest() {
     note = 'Saat data berada di tengah, hasil voting membantu membuat keputusan lebih stabil.';
   }
 
-  forestResult.innerHTML = `
-    <strong>Prediksi akhir:</strong> ${winner}<br>
-    ${note}<br><br>
-    <strong>Inti yang perlu dipahami:</strong> Random Forest tidak bergantung pada satu pohon saja, tetapi menggabungkan banyak pohon agar hasil akhirnya lebih kuat.
-  `;
+  if (forestResult) {
+    forestResult.innerHTML = `
+      <strong>Prediksi akhir:</strong> ${winner}<br>
+      ${note}<br><br>
+      <strong>Inti yang perlu dipahami:</strong> Random Forest tidak bergantung pada satu pohon saja, tetapi menggabungkan banyak pohon agar hasil akhirnya lebih kuat.
+    `;
+  }
 }
 
 function init() {
@@ -305,9 +345,10 @@ function init() {
   updateTree();
   updateForest();
 
-  svmKernel.addEventListener('change', updateSVM);
-  svmC.addEventListener('input', updateSVM);
-  svmGamma.addEventListener('input', updateSVM);
+  if (svmKernel) svmKernel.addEventListener('change', updateSVM);
+  if (svmC) svmC.addEventListener('input', updateSVM);
+  if (svmGamma) svmGamma.addEventListener('input', updateSVM);
+  if (svmDegree) svmDegree.addEventListener('input', updateSVM);
 
   presetButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -315,12 +356,11 @@ function init() {
     });
   });
 
-  petalLength.addEventListener('change', updateTree);
-  petalWidth.addEventListener('change', updateTree);
-  treeDepth.addEventListener('input', updateTree);
+  if (petalLength) petalLength.addEventListener('change', updateTree);
+  if (petalWidth) petalWidth.addEventListener('change', updateTree);
 
-  forestSample.addEventListener('change', updateForest);
-  forestTrees.addEventListener('input', updateForest);
+  if (forestSample) forestSample.addEventListener('change', updateForest);
+  if (forestTrees) forestTrees.addEventListener('input', updateForest);
 }
 
 init();

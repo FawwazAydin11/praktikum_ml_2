@@ -8,7 +8,7 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="container nav-wrap">
+    <div class="container topbar-inner">
       <div class="brand">Belajar Klasifikasi</div>
       <nav class="nav-links">
         <a href="#pengantar">Pengantar</a>
@@ -25,13 +25,13 @@
       <span class="eyebrow">Website belajar pembelajaran mesin</span>
       <h1>Belajar SVM, Decision Tree, dan Random Forest dari dasar sampai paham</h1>
       <p>
-        Website ini dibuat untuk membantu mahasiswa memahami tiga algoritma klasifikasi yang sering muncul pada praktikum pembelajaran mesin, yaitu Support Vector Machine, Decision Tree, dan Random Forest. Penjelasannya dimulai dari dasar banget, lalu pelan-pelan naik ke konsep inti, parameter utama, dan demo interaktif supaya kamu tidak hanya hafal istilahnya, tetapi juga paham cara berpikir modelnya.
+        Website ini dibuat untuk membantu mahasiswa memahami tiga algoritma klasifikasi yang sering muncul pada praktikum pembelajaran mesin, yaitu Support Vector Machine, Decision Tree, dan Random Forest. Penjelasannya dimulai dari dasar banget, lalu pelan-pelan naik ke konsep inti, parameter utama, visual penjelas, dan demo interaktif.
       </p>
       <div class="hero-tags">
         <span>Bahasa sederhana</span>
         <span>Dari dasar</span>
-        <span>Visual & demo</span>
-        <span>Cocok untuk belajar mandiri</span>
+        <span>Visual jelas</span>
+        <span>Demo interaktif</span>
       </div>
     </section>
 
@@ -69,7 +69,7 @@
             Saat model belajar, data biasanya dibagi menjadi dua bagian. Bagian pertama dipakai untuk <strong>training</strong>, yaitu proses model belajar dari data yang sudah diketahui jawabannya. Bagian kedua dipakai untuk <strong>testing</strong>, yaitu mengecek apakah model bisa menebak data baru dengan benar.
           </p>
           <div class="note-box soft">
-            Jadi, training itu seperti belajar dari contoh soal, sedangkan testing itu seperti mengerjakan soal baru untuk melihat apakah pemahamannya benar-benar sudah terbentuk.
+            Training itu seperti belajar dari contoh soal. Testing itu seperti mengerjakan soal baru untuk melihat apakah model benar-benar sudah memahami polanya.
           </div>
         </article>
         <article class="card">
@@ -126,7 +126,80 @@
         </article>
       </div>
 
-      <div class="grid grid-3">
+      <article class="visual-card">
+        <div class="section-heading compact">
+          <h3>Visual dasar Support Vector Machine (SVM)</h3>
+          <p>Sebelum masuk ke parameter seperti kernel, C, gamma, dan degree, pahami dulu cara kerja dasar SVM melalui gambar berikut.</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card inset-card">
+            <svg viewBox="0 0 620 360" width="100%" height="360" class="concept-svg" aria-label="Diagram dasar SVM">
+              <line x1="120" y1="300" x2="540" y2="300" stroke="#374151" stroke-width="2.5"></line>
+              <line x1="150" y1="320" x2="150" y2="40" stroke="#374151" stroke-width="2.5"></line>
+              <text x="548" y="322" font-size="20" fill="#374151">x₁</text>
+              <text x="132" y="34" font-size="20" fill="#374151">x₂</text>
+
+              <line x1="250" y1="100" x2="392" y2="286" stroke="#111827" stroke-width="3"></line>
+              <line x1="222" y1="104" x2="364" y2="290" stroke="#6b7280" stroke-width="2.5" stroke-dasharray="7 6"></line>
+              <line x1="278" y1="96" x2="420" y2="282" stroke="#6b7280" stroke-width="2.5" stroke-dasharray="7 6"></line>
+
+              <circle cx="210" cy="230" r="6" fill="#10b981"></circle>
+              <circle cx="232" cy="250" r="6" fill="#10b981"></circle>
+              <circle cx="250" cy="214" r="6" fill="#10b981"></circle>
+              <circle cx="260" cy="264" r="6" fill="#10b981"></circle>
+              <circle cx="278" cy="236" r="6" fill="#10b981"></circle>
+              <circle cx="292" cy="208" r="6" fill="#10b981"></circle>
+              <circle cx="300" cy="254" r="6" fill="#10b981"></circle>
+
+              <rect x="404" y="132" width="12" height="12" fill="#2563eb"></rect>
+              <rect x="426" y="154" width="12" height="12" fill="#2563eb"></rect>
+              <rect x="448" y="124" width="12" height="12" fill="#2563eb"></rect>
+              <rect x="458" y="168" width="12" height="12" fill="#2563eb"></rect>
+              <rect x="476" y="142" width="12" height="12" fill="#2563eb"></rect>
+              <rect x="490" y="118" width="12" height="12" fill="#2563eb"></rect>
+              <rect x="492" y="186" width="12" height="12" fill="#2563eb"></rect>
+
+              <circle cx="292" cy="208" r="10" fill="none" stroke="#111827" stroke-width="2"></circle>
+              <rect x="426" y="154" width="20" height="20" fill="none" stroke="#111827" stroke-width="2"></rect>
+
+              <text x="346" y="84" font-size="16" fill="#374151">Positive Hyperplane</text>
+              <text x="154" y="280" font-size="16" fill="#374151">Negative Hyperplane</text>
+              <text x="302" y="66" font-size="16" fill="#374151">Maximum Margin</text>
+              <text x="48" y="172" font-size="16" fill="#374151">Maximum</text>
+              <text x="48" y="192" font-size="16" fill="#374151">Margin</text>
+              <text x="48" y="212" font-size="16" fill="#374151">Hyperplane</text>
+              <text x="506" y="262" font-size="16" fill="#374151">Support</text>
+              <text x="506" y="282" font-size="16" fill="#374151">Vectors</text>
+
+              <line x1="286" y1="72" x2="314" y2="110" stroke="#374151" stroke-width="2"></line>
+              <line x1="124" y1="186" x2="246" y2="186" stroke="#374151" stroke-width="2"></line>
+              <line x1="482" y1="252" x2="444" y2="170" stroke="#374151" stroke-width="2"></line>
+            </svg>
+          </div>
+          <div class="card inset-card">
+            <h3>Apa yang ditunjukkan gambar ini?</h3>
+            <p>
+              Gambar ini menunjukkan bagaimana SVM memisahkan dua kelompok data yang berbeda. Titik hijau dan titik biru mewakili dua kelas data. Garis di tengah disebut <strong>hyperplane</strong>, yaitu batas utama yang dipakai untuk memisahkan kedua kelas tersebut.
+            </p>
+            <p>
+              Di sekitar hyperplane, terdapat jarak aman yang disebut <strong>margin</strong>. SVM tidak hanya mencari garis yang bisa memisahkan data, tetapi mencari garis yang mempunyai margin paling besar. Karena itu, SVM sering dianggap mencari batas pemisah yang paling aman.
+            </p>
+            <p>
+              Titik-titik yang paling dekat dengan hyperplane disebut <strong>support vectors</strong>. Titik-titik inilah yang paling berpengaruh dalam menentukan posisi batas pemisah.
+            </p>
+            <div class="note-box soft">
+              Bayangkan ada dua kelompok orang berdiri berjauhan. Tugas SVM adalah menarik garis di antara dua kelompok itu. Tetapi garisnya tidak boleh asal. Garis tersebut harus dipilih agar jaraknya dari kedua kelompok sama-sama aman dan selebar mungkin.
+            </div>
+            <ul class="clean-list">
+              <li><strong>Hyperplane</strong> = batas pemisah utama</li>
+              <li><strong>Margin</strong> = jarak aman dari batas ke data terdekat</li>
+              <li><strong>Support vectors</strong> = titik terdekat yang paling menentukan posisi batas</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid grid-3 compact-grid">
         <article class="mini-card">
           <h4>Hyperplane</h4>
           <p>Hyperplane adalah batas pemisah antar kelas. Pada dua dimensi, hyperplane bisa dibayangkan sebagai sebuah garis.</p>
@@ -141,24 +214,21 @@
         </article>
       </div>
 
-      <article class="card visual-card">
-        <h3>Parameter utama SVM</h3>
-        <p class="section-mini-desc">
-          Bagian ini dibuat lebih visual supaya kamu bisa membedakan peran masing-masing parameter dengan lebih mudah.
-        </p>
+      <article class="visual-card">
+        <div class="section-heading compact">
+          <h3>Parameter utama SVM</h3>
+          <p>Bagian ini dibuat lebih visual supaya kamu bisa membedakan peran masing-masing parameter dengan lebih mudah.</p>
+        </div>
         <div class="grid grid-4 parameter-grid">
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <circle cx="28" cy="22" r="5" fill="#3b82f6"></circle>
-                <circle cx="40" cy="46" r="5" fill="#3b82f6"></circle>
-                <circle cx="28" cy="70" r="5" fill="#3b82f6"></circle>
-                <rect x="116" y="18" width="10" height="10" fill="#ec4899"></rect>
-                <rect x="100" y="42" width="10" height="10" fill="#ec4899"></rect>
-                <rect x="114" y="66" width="10" height="10" fill="#ec4899"></rect>
-                <line x1="78" y1="12" x2="64" y2="78" stroke="#0f172a" stroke-width="4"></line>
-                <path d="M 76 12 C 84 34, 84 56, 74 78" stroke="#64748b" stroke-width="3" fill="none"></path>
-                <path d="M 90 12 C 102 34, 102 56, 88 78" stroke="#94a3b8" stroke-width="3" fill="none"></path>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <line x1="58" y1="12" x2="44" y2="96" stroke="#0f172a" stroke-width="4"></line>
+                <path d="M 112 14 C 98 32, 100 64, 86 96" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 148 14 C 122 34, 156 58, 120 96" stroke="#2563eb" stroke-width="4" fill="none"></path>
+                <text x="10" y="16" font-size="11" fill="#334155">linear</text>
+                <text x="88" y="16" font-size="11" fill="#334155">poly</text>
+                <text x="130" y="16" font-size="11" fill="#334155">rbf</text>
               </svg>
             </div>
             <h4>Kernel</h4>
@@ -166,11 +236,12 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <line x1="80" y1="10" x2="80" y2="80" stroke="#0f172a" stroke-width="4"></line>
-                <line x1="60" y1="10" x2="60" y2="80" stroke="#94a3b8" stroke-dasharray="6 5" stroke-width="2"></line>
-                <line x1="100" y1="10" x2="100" y2="80" stroke="#94a3b8" stroke-dasharray="6 5" stroke-width="2"></line>
-                <text x="16" y="18" font-size="11" fill="#64748b">margin lebar</text>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <line x1="90" y1="12" x2="90" y2="96" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="56" y1="12" x2="56" y2="96" stroke="#94a3b8" stroke-dasharray="7 5" stroke-width="2.5"></line>
+                <line x1="124" y1="12" x2="124" y2="96" stroke="#94a3b8" stroke-dasharray="7 5" stroke-width="2.5"></line>
+                <text x="16" y="18" font-size="11" fill="#334155">C kecil → margin lebar</text>
+                <text x="74" y="106" font-size="11" fill="#334155">C besar → margin sempit</text>
               </svg>
             </div>
             <h4>C</h4>
@@ -178,11 +249,11 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <path d="M 12 64 C 36 42, 58 40, 82 44 C 104 48, 122 52, 148 20" stroke="#64748b" stroke-width="4" fill="none"></path>
-                <path d="M 12 70 C 24 20, 56 84, 86 18 C 108 70, 126 56, 148 14" stroke="#0f172a" stroke-width="4" fill="none"></path>
-                <text x="12" y="16" font-size="11" fill="#64748b">halus</text>
-                <text x="112" y="16" font-size="11" fill="#0f172a">rumit</text>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <path d="M 10 78 C 40 44, 70 44, 100 48 C 126 52, 146 46, 170 18" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 10 86 C 28 24, 56 98, 92 22 C 118 70, 144 56, 170 12" stroke="#0f172a" stroke-width="4" fill="none"></path>
+                <text x="10" y="16" font-size="11" fill="#334155">gamma kecil</text>
+                <text x="110" y="16" font-size="11" fill="#334155">gamma besar</text>
               </svg>
             </div>
             <h4>Gamma</h4>
@@ -190,10 +261,11 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <path d="M 12 68 Q 80 18 148 68" stroke="#64748b" stroke-width="4" fill="none"></path>
-                <path d="M 12 68 C 34 14, 60 14, 82 68 C 104 18, 126 18, 148 68" stroke="#0f172a" stroke-width="4" fill="none"></path>
-                <text x="16" y="16" font-size="11" fill="#64748b">degree rendah</text>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <path d="M 10 84 Q 90 24 170 84" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 10 84 C 38 18, 66 20, 90 84 C 114 28, 142 22, 170 84" stroke="#0f172a" stroke-width="4" fill="none"></path>
+                <text x="12" y="16" font-size="11" fill="#334155">degree rendah</text>
+                <text x="106" y="16" font-size="11" fill="#334155">degree tinggi</text>
               </svg>
             </div>
             <h4>Degree</h4>
@@ -209,9 +281,10 @@
             <p>Coba ubah parameter di bawah ini untuk melihat perubahan bentuk hyperplane dan margin.</p>
           </div>
           <div class="preset-buttons">
-            <button class="preset-btn" data-svm-preset="linear">Preset Linear</button>
-            <button class="preset-btn" data-svm-preset="rbf-soft">Preset RBF Halus</button>
-            <button class="preset-btn" data-svm-preset="rbf-tight">Preset RBF Ketat</button>
+            <button type="button" class="preset-btn" data-svm-preset="linear">Preset Linear</button>
+            <button type="button" class="preset-btn" data-svm-preset="poly">Preset Polynomial</button>
+            <button type="button" class="preset-btn" data-svm-preset="rbf-soft">Preset RBF Halus</button>
+            <button type="button" class="preset-btn" data-svm-preset="rbf-tight">Preset RBF Ketat</button>
           </div>
         </div>
 
@@ -235,7 +308,7 @@
           </div>
         </div>
 
-        <div class="controls three-col">
+        <div class="controls four-col">
           <label>
             Kernel
             <select id="svmKernel">
@@ -251,6 +324,10 @@
           <label>
             Nilai Gamma: <span id="gValue">40</span>
             <input id="svmGamma" type="range" min="0" max="100" value="40" />
+          </label>
+          <label id="degreeControl" class="hidden-control">
+            Degree: <span id="degreeValue">3</span>
+            <input id="svmDegree" type="range" min="2" max="6" value="3" />
           </label>
         </div>
 
@@ -277,7 +354,6 @@
           </ul>
         </article>
       </div>
-    </section>
 
     <section class="section model-section" id="decision-tree">
       <div class="section-heading">
@@ -302,35 +378,112 @@
         </article>
 
         <article class="card">
-          <h3>Bagian utama Decision Tree</h3>
-          <div class="stack-mini">
-            <div class="mini-card">
-              <h4>Root node</h4>
-              <p>Titik awal pohon. Semua data masuk dari sini.</p>
-            </div>
-            <div class="mini-card">
-              <h4>Decision node</h4>
-              <p>Bagian pohon tempat model mengajukan pertanyaan, misalnya apakah suatu fitur lebih kecil dari nilai tertentu.</p>
-            </div>
-            <div class="mini-card">
-              <h4>Leaf node</h4>
-              <p>Ujung pohon yang berisi hasil akhir keputusan, misalnya Setosa atau Virginica.</p>
-            </div>
-          </div>
+          <h3>Cara berpikir Decision Tree</h3>
+          <ol class="step-list">
+            <li>Semua data masuk dari titik awal.</li>
+            <li>Model memilih pertanyaan yang dianggap paling membantu membagi data.</li>
+            <li>Data bergerak ke cabang yang sesuai dengan jawabannya.</li>
+            <li>Proses ini terus berulang sampai akhirnya data sampai di hasil akhir.</li>
+          </ol>
         </article>
       </div>
 
-      <article class="card visual-card">
-        <h3>Bagaimana Decision Tree membangun aturan?</h3>
+      <article class="visual-card">
+        <div class="section-heading compact">
+          <h3>Struktur dasar Decision Tree</h3>
+          <p>Sebelum mempelajari parameter dan demo interaktifnya, pahami dulu bagian-bagian utama pada Decision Tree.</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card inset-card">
+            <svg viewBox="0 0 620 420" width="100%" height="360" class="concept-svg" aria-label="Struktur dasar Decision Tree">
+              <rect x="252" y="30" width="116" height="40" rx="8" fill="#10b981"></rect>
+              <text x="310" y="55" text-anchor="middle" font-size="18" fill="#ffffff">Root Node</text>
+
+              <line x1="310" y1="70" x2="310" y2="96" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="310" y1="96" x2="180" y2="96" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="310" y1="96" x2="442" y2="96" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="180" y1="96" x2="180" y2="118" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="442" y1="96" x2="442" y2="118" stroke="#4b5563" stroke-width="3"></line>
+
+              <rect x="118" y="118" width="124" height="40" rx="8" fill="#2563eb"></rect>
+              <text x="180" y="143" text-anchor="middle" font-size="18" fill="#ffffff">Decision Node</text>
+
+              <rect x="380" y="118" width="124" height="40" rx="8" fill="#2563eb"></rect>
+              <text x="442" y="143" text-anchor="middle" font-size="18" fill="#ffffff">Decision Node</text>
+
+              <line x1="180" y1="158" x2="180" y2="188" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="180" y1="188" x2="120" y2="188" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="180" y1="188" x2="240" y2="188" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="120" y1="188" x2="120" y2="212" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="240" y1="188" x2="240" y2="212" stroke="#4b5563" stroke-width="3"></line>
+
+              <ellipse cx="120" cy="236" rx="52" ry="28" fill="#f43f5e"></ellipse>
+              <ellipse cx="240" cy="236" rx="52" ry="28" fill="#f43f5e"></ellipse>
+              <text x="120" y="242" text-anchor="middle" font-size="18" fill="#ffffff">Leaf Node</text>
+              <text x="240" y="242" text-anchor="middle" font-size="18" fill="#ffffff">Leaf Node</text>
+
+              <line x1="442" y1="158" x2="442" y2="188" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="442" y1="188" x2="382" y2="188" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="442" y1="188" x2="502" y2="188" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="382" y1="188" x2="382" y2="212" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="502" y1="188" x2="502" y2="212" stroke="#4b5563" stroke-width="3"></line>
+
+              <ellipse cx="382" cy="236" rx="52" ry="28" fill="#f43f5e"></ellipse>
+              <rect x="438" y="212" width="128" height="40" rx="8" fill="#2563eb"></rect>
+              <text x="382" y="242" text-anchor="middle" font-size="18" fill="#ffffff">Leaf Node</text>
+              <text x="502" y="237" text-anchor="middle" font-size="18" fill="#ffffff">Decision Node</text>
+
+              <line x1="502" y1="252" x2="502" y2="290" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="502" y1="290" x2="442" y2="290" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="502" y1="290" x2="562" y2="290" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="442" y1="290" x2="442" y2="314" stroke="#4b5563" stroke-width="3"></line>
+              <line x1="562" y1="290" x2="562" y2="314" stroke="#4b5563" stroke-width="3"></line>
+
+              <ellipse cx="442" cy="338" rx="52" ry="28" fill="#f43f5e"></ellipse>
+              <ellipse cx="562" cy="338" rx="52" ry="28" fill="#f43f5e"></ellipse>
+              <text x="442" y="344" text-anchor="middle" font-size="18" fill="#ffffff">Leaf Node</text>
+              <text x="562" y="344" text-anchor="middle" font-size="18" fill="#ffffff">Leaf Node</text>
+            </svg>
+          </div>
+          <div class="card inset-card">
+            <h3>Apa yang ditunjukkan gambar ini?</h3>
+            <p>
+              Gambar ini menunjukkan struktur dasar dari <strong>Decision Tree</strong>. Bagian paling atas disebut <strong>root node</strong>, yaitu titik awal tempat semua data masuk.
+            </p>
+            <p>
+              Dari root node, data bergerak ke bawah dan melewati <strong>decision node</strong>. Di bagian ini, model membuat keputusan berdasarkan aturan atau pertanyaan tertentu.
+            </p>
+            <p>
+              Di bagian paling bawah terdapat <strong>leaf node</strong>. Leaf node adalah hasil akhir dari proses keputusan. Pada bagian inilah model memberikan output akhir, misalnya kelas Setosa, Versicolor, atau Virginica.
+            </p>
+            <div class="note-box soft">
+              Decision Tree bisa dibayangkan seperti permainan tanya-jawab. Model mulai dari satu titik awal, lalu mengajukan pertanyaan. Berdasarkan jawabannya, data masuk ke cabang tertentu sampai akhirnya mencapai jawaban akhir.
+            </div>
+            <ul class="clean-list">
+              <li><strong>Root node</strong> = titik awal semua data</li>
+              <li><strong>Decision node</strong> = tempat model mengajukan pertanyaan</li>
+              <li><strong>Leaf node</strong> = hasil akhir keputusan</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="visual-card">
+        <div class="section-heading compact">
+          <h3>Parameter utama Decision Tree</h3>
+          <p>Di bawah ini adalah parameter penting pada Decision Tree yang perlu dipahami mahasiswa.</p>
+        </div>
         <div class="grid grid-3 parameter-grid">
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <rect x="56" y="8" width="48" height="20" rx="10" fill="#dbeafe"></rect>
-                <line x1="80" y1="28" x2="46" y2="56" stroke="#64748b" stroke-width="3"></line>
-                <line x1="80" y1="28" x2="114" y2="56" stroke="#64748b" stroke-width="3"></line>
-                <rect x="18" y="56" width="56" height="18" rx="9" fill="#ecfccb"></rect>
-                <rect x="86" y="56" width="56" height="18" rx="9" fill="#fae8ff"></rect>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <circle cx="38" cy="40" r="8" fill="#60a5fa"></circle>
+                <circle cx="58" cy="58" r="8" fill="#60a5fa"></circle>
+                <circle cx="78" cy="40" r="8" fill="#f87171"></circle>
+                <circle cx="98" cy="58" r="8" fill="#f87171"></circle>
+                <line x1="132" y1="22" x2="132" y2="88" stroke="#111827" stroke-width="4"></line>
+                <text x="18" y="16" font-size="11" fill="#334155">sebelum split</text>
+                <text x="114" y="16" font-size="11" fill="#334155">lebih rapi</text>
               </svg>
             </div>
             <h4>Criterion</h4>
@@ -338,27 +491,28 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <circle cx="80" cy="16" r="10" fill="#dbeafe"></circle>
-                <line x1="80" y1="26" x2="80" y2="42" stroke="#64748b" stroke-width="3"></line>
-                <line x1="80" y1="42" x2="48" y2="62" stroke="#64748b" stroke-width="3"></line>
-                <line x1="80" y1="42" x2="112" y2="62" stroke="#64748b" stroke-width="3"></line>
-                <circle cx="48" cy="62" r="8" fill="#bfdbfe"></circle>
-                <circle cx="112" cy="62" r="8" fill="#bfdbfe"></circle>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <line x1="46" y1="86" x2="46" y2="32" stroke="#64748b" stroke-width="4"></line>
+                <line x1="46" y1="42" x2="24" y2="22" stroke="#64748b" stroke-width="4"></line>
+                <line x1="46" y1="42" x2="68" y2="22" stroke="#64748b" stroke-width="4"></line>
+                <line x1="126" y1="86" x2="126" y2="18" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="126" y1="30" x2="98" y2="6" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="126" y1="30" x2="154" y2="6" stroke="#0f172a" stroke-width="4"></line>
+                <text x="14" y="102" font-size="11" fill="#334155">dangkal</text>
+                <text x="112" y="102" font-size="11" fill="#334155">dalam</text>
               </svg>
             </div>
             <h4>max_depth</h4>
-            <p>max_depth mengatur seberapa dalam pohon boleh tumbuh. Semakin dalam, aturan makin detail, tetapi risiko overfitting juga naik.</p>
+            <p>max_depth mengatur seberapa dalam pohon boleh tumbuh. Semakin dalam, aturan makin detail, tetapi risiko overfitting juga meningkat.</p>
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <rect x="22" y="18" width="18" height="18" fill="#bfdbfe"></rect>
-                <rect x="46" y="18" width="18" height="18" fill="#bfdbfe"></rect>
-                <rect x="70" y="18" width="18" height="18" fill="#bfdbfe"></rect>
-                <rect x="94" y="18" width="18" height="18" fill="#fecaca"></rect>
-                <rect x="118" y="18" width="18" height="18" fill="#fecaca"></rect>
-                <text x="20" y="64" font-size="11" fill="#64748b">berapa data boleh dipecah?</text>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <rect x="20" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <rect x="40" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <rect x="60" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <rect x="80" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <line x1="128" y1="18" x2="128" y2="90" stroke="#111827" stroke-width="4"></line>
               </svg>
             </div>
             <h4>min_samples_split</h4>
@@ -366,11 +520,11 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <circle cx="52" cy="44" r="7" fill="#bfdbfe"></circle>
-                <circle cx="68" cy="44" r="7" fill="#bfdbfe"></circle>
-                <circle cx="84" cy="44" r="7" fill="#bfdbfe"></circle>
-                <circle cx="100" cy="44" r="7" fill="#bfdbfe"></circle>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <circle cx="50" cy="54" r="7" fill="#93c5fd"></circle>
+                <circle cx="68" cy="54" r="7" fill="#93c5fd"></circle>
+                <circle cx="86" cy="54" r="7" fill="#93c5fd"></circle>
+                <circle cx="104" cy="54" r="7" fill="#93c5fd"></circle>
               </svg>
             </div>
             <h4>min_samples_leaf</h4>
@@ -378,11 +532,12 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <rect x="18" y="22" width="20" height="46" fill="#bfdbfe"></rect>
-                <rect x="46" y="34" width="20" height="34" fill="#bfdbfe"></rect>
-                <rect x="74" y="16" width="20" height="52" fill="#fecaca"></rect>
-                <rect x="102" y="42" width="20" height="26" fill="#bfdbfe"></rect>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <rect x="18" y="28" width="18" height="48" fill="#93c5fd"></rect>
+                <rect x="44" y="42" width="18" height="34" fill="#fde68a"></rect>
+                <rect x="70" y="18" width="18" height="58" fill="#93c5fd"></rect>
+                <rect x="96" y="46" width="18" height="30" fill="#fde68a"></rect>
+                <text x="14" y="18" font-size="11" fill="#334155">hanya sebagian fitur</text>
               </svg>
             </div>
             <h4>max_features</h4>
@@ -390,13 +545,14 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <path d="M 22 60 L 52 26 L 82 60" stroke="#64748b" stroke-width="4" fill="none"></path>
-                <path d="M 84 60 L 110 34 L 138 60" stroke="#0f172a" stroke-width="4" fill="none"></path>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <path d="M 14 80 L 52 32 L 90 80" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 92 80 L 122 22 L 164 80" stroke="#0f172a" stroke-width="4" fill="none"></path>
+                <text x="12" y="18" font-size="11" fill="#334155">beberapa kandidat split</text>
               </svg>
             </div>
             <h4>Splitter</h4>
-            <p>Menentukan cara model memilih split. Sederhananya, model bisa mencari split terbaik dari pilihan yang tersedia.</p>
+            <p>Splitter menentukan cara model memilih split. Sederhananya, model bisa mencari split terbaik dari pilihan yang tersedia.</p>
           </div>
         </div>
       </article>
@@ -409,7 +565,7 @@
           </div>
         </div>
 
-        <div class="controls three-col">
+        <div class="controls two-col">
           <label>
             Petal Length
             <select id="petalLength">
@@ -425,10 +581,6 @@
               <option value="sedang" selected>Sedang</option>
               <option value="lebar">Lebar</option>
             </select>
-          </label>
-          <label>
-            Kedalaman pohon (simulasi): <span id="depthValue">3</span>
-            <input id="treeDepth" type="range" min="1" max="5" value="3" />
           </label>
         </div>
 
@@ -497,18 +649,21 @@
         </article>
       </div>
 
-      <article class="card visual-card">
-        <h3>Parameter utama Random Forest</h3>
+      <article class="visual-card">
+        <div class="section-heading compact">
+          <h3>Parameter utama Random Forest</h3>
+          <p>Parameter di bawah ini membantu memahami bagaimana Random Forest dibentuk dari banyak tree.</p>
+        </div>
         <div class="grid grid-3 parameter-grid">
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <circle cx="34" cy="34" r="12" fill="#dbeafe"></circle>
-                <circle cx="80" cy="34" r="12" fill="#dbeafe"></circle>
-                <circle cx="126" cy="34" r="12" fill="#dbeafe"></circle>
-                <rect x="26" y="60" width="16" height="18" fill="#93c5fd"></rect>
-                <rect x="72" y="60" width="16" height="18" fill="#93c5fd"></rect>
-                <rect x="118" y="60" width="16" height="18" fill="#93c5fd"></rect>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <circle cx="32" cy="32" r="10" fill="#bfdbfe"></circle>
+                <circle cx="90" cy="32" r="10" fill="#bfdbfe"></circle>
+                <circle cx="148" cy="32" r="10" fill="#bfdbfe"></circle>
+                <rect x="24" y="62" width="16" height="18" fill="#93c5fd"></rect>
+                <rect x="82" y="62" width="16" height="18" fill="#93c5fd"></rect>
+                <rect x="140" y="62" width="16" height="18" fill="#93c5fd"></rect>
               </svg>
             </div>
             <h4>n_estimators</h4>
@@ -516,13 +671,13 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <line x1="50" y1="74" x2="50" y2="26" stroke="#64748b" stroke-width="4"></line>
-                <line x1="50" y1="34" x2="26" y2="18" stroke="#64748b" stroke-width="4"></line>
-                <line x1="50" y1="34" x2="74" y2="18" stroke="#64748b" stroke-width="4"></line>
-                <line x1="112" y1="74" x2="112" y2="12" stroke="#0f172a" stroke-width="4"></line>
-                <line x1="112" y1="20" x2="86" y2="6" stroke="#0f172a" stroke-width="4"></line>
-                <line x1="112" y1="20" x2="138" y2="6" stroke="#0f172a" stroke-width="4"></line>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <line x1="54" y1="84" x2="54" y2="34" stroke="#64748b" stroke-width="4"></line>
+                <line x1="54" y1="44" x2="30" y2="22" stroke="#64748b" stroke-width="4"></line>
+                <line x1="54" y1="44" x2="78" y2="22" stroke="#64748b" stroke-width="4"></line>
+                <line x1="126" y1="84" x2="126" y2="16" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="126" y1="28" x2="98" y2="6" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="126" y1="28" x2="154" y2="6" stroke="#0f172a" stroke-width="4"></line>
               </svg>
             </div>
             <h4>max_depth</h4>
@@ -530,12 +685,12 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <rect x="18" y="18" width="18" height="18" fill="#93c5fd"></rect>
-                <rect x="42" y="18" width="18" height="18" fill="#93c5fd"></rect>
-                <rect x="66" y="18" width="18" height="18" fill="#93c5fd"></rect>
-                <rect x="90" y="18" width="18" height="18" fill="#fca5a5"></rect>
-                <rect x="114" y="18" width="18" height="18" fill="#fca5a5"></rect>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <rect x="20" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <rect x="40" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <rect x="60" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <rect x="80" y="28" width="16" height="16" fill="#93c5fd"></rect>
+                <line x1="128" y1="18" x2="128" y2="90" stroke="#111827" stroke-width="4"></line>
               </svg>
             </div>
             <h4>min_samples_split</h4>
@@ -543,11 +698,11 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <circle cx="44" cy="48" r="6" fill="#93c5fd"></circle>
-                <circle cx="60" cy="48" r="6" fill="#93c5fd"></circle>
-                <circle cx="76" cy="48" r="6" fill="#93c5fd"></circle>
-                <circle cx="92" cy="48" r="6" fill="#93c5fd"></circle>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <circle cx="50" cy="54" r="7" fill="#93c5fd"></circle>
+                <circle cx="68" cy="54" r="7" fill="#93c5fd"></circle>
+                <circle cx="86" cy="54" r="7" fill="#93c5fd"></circle>
+                <circle cx="104" cy="54" r="7" fill="#93c5fd"></circle>
               </svg>
             </div>
             <h4>min_samples_leaf</h4>
@@ -555,12 +710,12 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <rect x="18" y="22" width="18" height="44" fill="#93c5fd"></rect>
-                <rect x="42" y="30" width="18" height="36" fill="#fde68a"></rect>
-                <rect x="66" y="14" width="18" height="52" fill="#93c5fd"></rect>
-                <rect x="90" y="38" width="18" height="28" fill="#fde68a"></rect>
-                <rect x="114" y="20" width="18" height="46" fill="#93c5fd"></rect>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <rect x="18" y="24" width="18" height="48" fill="#93c5fd"></rect>
+                <rect x="44" y="42" width="18" height="30" fill="#fde68a"></rect>
+                <rect x="70" y="18" width="18" height="54" fill="#93c5fd"></rect>
+                <rect x="96" y="38" width="18" height="34" fill="#fde68a"></rect>
+                <rect x="122" y="24" width="18" height="48" fill="#93c5fd"></rect>
               </svg>
             </div>
             <h4>max_features</h4>
@@ -568,12 +723,14 @@
           </div>
           <div class="parameter-card">
             <div class="parameter-figure">
-              <svg viewBox="0 0 160 90" width="100%" height="90">
-                <rect x="18" y="18" width="20" height="20" fill="#93c5fd"></rect>
-                <rect x="42" y="18" width="20" height="20" fill="#93c5fd"></rect>
-                <rect x="66" y="18" width="20" height="20" fill="#93c5fd"></rect>
-                <rect x="42" y="46" width="20" height="20" fill="#93c5fd"></rect>
-                <rect x="90" y="46" width="20" height="20" fill="#93c5fd"></rect>
+              <svg viewBox="0 0 180 110" width="100%" height="96">
+                <text x="10" y="24" font-size="11" fill="#334155">data asli: A B C D E</text>
+                <text x="10" y="56" font-size="11" fill="#334155">bootstrap: A C C D E</text>
+                <rect x="14" y="68" width="20" height="18" fill="#93c5fd"></rect>
+                <rect x="40" y="68" width="20" height="18" fill="#fde68a"></rect>
+                <rect x="66" y="68" width="20" height="18" fill="#fde68a"></rect>
+                <rect x="92" y="68" width="20" height="18" fill="#93c5fd"></rect>
+                <rect x="118" y="68" width="20" height="18" fill="#93c5fd"></rect>
               </svg>
             </div>
             <h4>Bootstrap</h4>
