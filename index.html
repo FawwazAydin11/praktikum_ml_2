@@ -23,55 +23,70 @@
   <main class="container page">
     <section class="hero" id="pengantar">
       <span class="eyebrow">Website belajar pembelajaran mesin</span>
-      <h1>Belajar SVM, Decision Tree, dan Random Forest dengan bahasa yang mudah dipahami</h1>
+      <h1>Belajar SVM, Decision Tree, dan Random Forest dari dasar sampai paham</h1>
       <p>
-        Website ini ditujukan untuk mahasiswa yang sedang mempelajari materi klasifikasi. Di dalamnya ada tiga bagian utama, yaitu Support Vector Machine, Decision Tree, dan Random Forest. Setiap bagian berisi teori dasar, penjelasan konsep inti, parameter penting, kelebihan dan kekurangan, serta demo interaktif sederhana agar konsepnya lebih mudah dipahami.
+        Website ini dibuat untuk membantu mahasiswa memahami tiga algoritma klasifikasi yang sering muncul pada praktikum pembelajaran mesin, yaitu Support Vector Machine, Decision Tree, dan Random Forest. Penjelasannya dimulai dari dasar banget, lalu pelan-pelan naik ke konsep inti, parameter utama, dan demo interaktif supaya kamu tidak hanya hafal istilahnya, tetapi juga paham cara berpikir modelnya.
       </p>
       <div class="hero-tags">
         <span>Bahasa sederhana</span>
-        <span>Teori inti</span>
-        <span>Demo interaktif</span>
+        <span>Dari dasar</span>
+        <span>Visual & demo</span>
         <span>Cocok untuk belajar mandiri</span>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
-        <h2>Sebelum mulai, kita sedang menyelesaikan masalah apa?</h2>
+        <h2>Kita mulai dari yang paling dasar dulu</h2>
         <p>
-          Pada contoh praktikum ini, model diminta mengenali jenis bunga Iris dari ciri-cirinya, misalnya panjang dan lebar petal. Tugas model adalah menentukan apakah suatu data termasuk kelas Setosa, Versicolor, atau Virginica. Masalah seperti ini disebut <strong>klasifikasi</strong>, yaitu menentukan suatu data masuk ke kelas yang mana.
+          Pada contoh praktikum ini, model diminta mengenali jenis bunga Iris berdasarkan ciri-cirinya, misalnya panjang petal dan lebar petal. Tugas model adalah menentukan apakah suatu data termasuk kelas Setosa, Versicolor, atau Virginica. Masalah seperti ini disebut <strong>klasifikasi</strong>, yaitu tugas untuk menentukan suatu data masuk ke kelas yang mana.
         </p>
       </div>
 
-      <div class="grid grid-3">
+      <div class="grid grid-4">
+        <article class="mini-card">
+          <h4>Data</h4>
+          <p>Data adalah kumpulan contoh yang akan dipelajari model. Dalam contoh ini, datanya adalah bunga Iris.</p>
+        </article>
+        <article class="mini-card">
+          <h4>Fitur</h4>
+          <p>Fitur adalah informasi yang dipakai model, misalnya panjang petal, lebar petal, panjang sepal, dan lebar sepal.</p>
+        </article>
+        <article class="mini-card">
+          <h4>Label / kelas</h4>
+          <p>Label adalah jawaban yang ingin diprediksi model, misalnya Setosa, Versicolor, atau Virginica.</p>
+        </article>
+        <article class="mini-card">
+          <h4>Prediksi</h4>
+          <p>Prediksi adalah hasil tebakan model terhadap data yang diberikan.</p>
+        </article>
+      </div>
+
+      <div class="grid grid-2 two-up">
         <article class="card">
-          <h3>Setosa</h3>
-          <p>Biasanya paling mudah dikenali karena ciri petalnya cukup berbeda dibanding dua kelas lainnya.</p>
-          <div class="pill-row">
-            <span class="pill">Mudah dipisahkan</span>
-            <span class="pill">Sering jadi contoh awal</span>
+          <h3>Training dan testing</h3>
+          <p>
+            Saat model belajar, data biasanya dibagi menjadi dua bagian. Bagian pertama dipakai untuk <strong>training</strong>, yaitu proses model belajar dari data yang sudah diketahui jawabannya. Bagian kedua dipakai untuk <strong>testing</strong>, yaitu mengecek apakah model bisa menebak data baru dengan benar.
+          </p>
+          <div class="note-box soft">
+            Jadi, training itu seperti belajar dari contoh soal, sedangkan testing itu seperti mengerjakan soal baru untuk melihat apakah pemahamannya benar-benar sudah terbentuk.
           </div>
         </article>
         <article class="card">
-          <h3>Versicolor</h3>
-          <p>Sering berada di tengah, sehingga kadang lebih sulit dibedakan dari Virginica.</p>
-          <div class="pill-row">
-            <span class="pill">Nilai menengah</span>
-            <span class="pill">Perlu model teliti</span>
+          <h3>Tiga kelas pada contoh Iris</h3>
+          <div class="pill-stack">
+            <span class="pill">Setosa: biasanya paling mudah dipisahkan</span>
+            <span class="pill">Versicolor: sering berada di tengah</span>
+            <span class="pill">Virginica: cenderung lebih besar, kadang mirip Versicolor</span>
           </div>
-        </article>
-        <article class="card">
-          <h3>Virginica</h3>
-          <p>Biasanya memiliki petal yang lebih besar, tetapi beberapa datanya masih bisa mirip Versicolor.</p>
-          <div class="pill-row">
-            <span class="pill">Petal cenderung besar</span>
-            <span class="pill">Kadang ambigu</span>
-          </div>
+          <p>
+            Ketiga algoritma di website ini punya tujuan yang sama, yaitu mengelompokkan bunga ke kelas yang tepat. Bedanya, masing-masing algoritma punya cara berpikir yang berbeda untuk mengambil keputusan.
+          </p>
         </article>
       </div>
 
       <div class="note-box info">
-        Ketiga algoritma di website ini sama-sama bertujuan melakukan klasifikasi, tetapi cara mereka mengambil keputusan berbeda. SVM mencari batas pemisah terbaik, Decision Tree membuat aturan bercabang, dan Random Forest menggabungkan banyak pohon keputusan agar hasilnya lebih stabil.
+        Hal penting yang perlu diingat dari awal: <strong>SVM</strong> fokus mencari batas pemisah terbaik, <strong>Decision Tree</strong> fokus membuat aturan bercabang, dan <strong>Random Forest</strong> fokus menggabungkan banyak pohon agar hasilnya lebih stabil.
       </div>
     </section>
 
@@ -79,7 +94,7 @@
       <div class="section-heading">
         <h2>1. Support Vector Machine (SVM)</h2>
         <p>
-          Bagian ini membahas SVM dari konsep dasarnya sampai demo interaktif. Fokus utama SVM adalah mencari batas pemisah terbaik antar kelas.
+          Di bagian ini, kamu akan mempelajari SVM mulai dari pengertian paling dasar, konsep penting seperti hyperplane dan margin, sampai parameter utama dan demo interaktifnya.
         </p>
       </div>
 
@@ -87,54 +102,116 @@
         <article class="card">
           <h3>Apa itu SVM?</h3>
           <p>
-            Support Vector Machine adalah algoritma machine learning untuk klasifikasi yang bekerja dengan mencari <strong>hyperplane</strong> terbaik untuk memisahkan data ke dalam kelas yang berbeda.
+            Support Vector Machine adalah algoritma machine learning yang digunakan untuk klasifikasi. Inti kerjanya adalah mencari <strong>batas pemisah terbaik</strong> antara dua atau lebih kelas data.
           </p>
           <p>
-            Jika data digambar pada dua dimensi, hyperplane bisa dibayangkan sebagai sebuah garis. Jika datanya memiliki banyak dimensi, hyperplane bisa dibayangkan sebagai batas pemisah yang lebih umum.
+            Kalau data digambar pada dua dimensi, batas itu bisa dibayangkan sebagai sebuah garis. Kalau data berada pada dimensi yang lebih tinggi, batas itu disebut <strong>hyperplane</strong>.
           </p>
           <div class="note-box soft">
-            Intinya, SVM berusaha mencari pemisah yang paling baik di antara dua kelompok data.
+            Sederhananya, SVM mencoba menjawab pertanyaan ini: “garis pemisah seperti apa yang paling baik untuk memisahkan dua kelompok data?”
           </div>
         </article>
 
         <article class="card">
-          <h3>Hyperplane, margin, dan support vector</h3>
-          <p>
-            SVM tidak hanya mencari garis pemisah, tetapi mencari pemisah dengan <strong>margin</strong> paling besar. Margin adalah jarak antara batas keputusan dengan titik data terdekat dari masing-masing kelas.
-          </p>
-          <p>
-            Titik data yang paling dekat dengan batas itu disebut <strong>support vector</strong>. Titik-titik inilah yang paling berpengaruh dalam menentukan posisi batas pemisah.
-          </p>
+          <h3>Cara berpikir SVM tahap demi tahap</h3>
+          <ol class="step-list">
+            <li>Model melihat ada dua kelompok data yang ingin dipisahkan.</li>
+            <li>Model mencoba berbagai kemungkinan batas pemisah.</li>
+            <li>Model memilih batas yang memberi jarak paling aman dari kedua kelompok.</li>
+            <li>Batas inilah yang nanti dipakai untuk menentukan data baru masuk ke kelas yang mana.</li>
+          </ol>
           <div class="note-box soft">
-            Bayangkan ada dua kelompok orang berdiri. Kamu ingin menarik garis di tengah, tetapi garis itu harus memberi ruang aman paling lebar dari kedua kelompok. Itulah ide margin pada SVM.
+            Dengan kata lain, SVM tidak hanya mencari batas yang memisahkan, tetapi batas yang <strong>paling aman</strong> untuk memisahkan.
           </div>
         </article>
       </div>
 
-      <div class="grid grid-4 compact-grid">
+      <div class="grid grid-3">
         <article class="mini-card">
-          <h4>Kernel</h4>
-          <p>Menentukan bentuk batas pemisah. Linear cocok untuk pola lurus, sedangkan poly dan RBF cocok untuk pola yang lebih melengkung.</p>
+          <h4>Hyperplane</h4>
+          <p>Hyperplane adalah batas pemisah antar kelas. Pada dua dimensi, hyperplane bisa dibayangkan sebagai sebuah garis.</p>
         </article>
         <article class="mini-card">
-          <h4>Gamma</h4>
-          <p>Mengatur seberapa besar pengaruh satu titik data terhadap bentuk batas keputusan di sekitarnya.</p>
+          <h4>Margin</h4>
+          <p>Margin adalah jarak antara hyperplane dengan titik data terdekat dari masing-masing kelas. SVM ingin margin ini sebesar mungkin.</p>
         </article>
         <article class="mini-card">
-          <h4>Regularization (C)</h4>
-          <p>Mengatur seberapa ketat model terhadap kesalahan pada data latihan. Nilai C besar membuat model lebih keras terhadap kesalahan.</p>
-        </article>
-        <article class="mini-card">
-          <h4>Degree</h4>
-          <p>Digunakan pada kernel polynomial dan memengaruhi tingkat kelengkungan pemisah.</p>
+          <h4>Support vector</h4>
+          <p>Support vector adalah titik data yang paling dekat dengan batas pemisah. Titik-titik inilah yang sangat berpengaruh dalam menentukan posisi hyperplane.</p>
         </article>
       </div>
+
+      <article class="card visual-card">
+        <h3>Parameter utama SVM</h3>
+        <p class="section-mini-desc">
+          Bagian ini dibuat lebih visual supaya kamu bisa membedakan peran masing-masing parameter dengan lebih mudah.
+        </p>
+        <div class="grid grid-4 parameter-grid">
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <circle cx="28" cy="22" r="5" fill="#3b82f6"></circle>
+                <circle cx="40" cy="46" r="5" fill="#3b82f6"></circle>
+                <circle cx="28" cy="70" r="5" fill="#3b82f6"></circle>
+                <rect x="116" y="18" width="10" height="10" fill="#ec4899"></rect>
+                <rect x="100" y="42" width="10" height="10" fill="#ec4899"></rect>
+                <rect x="114" y="66" width="10" height="10" fill="#ec4899"></rect>
+                <line x1="78" y1="12" x2="64" y2="78" stroke="#0f172a" stroke-width="4"></line>
+                <path d="M 76 12 C 84 34, 84 56, 74 78" stroke="#64748b" stroke-width="3" fill="none"></path>
+                <path d="M 90 12 C 102 34, 102 56, 88 78" stroke="#94a3b8" stroke-width="3" fill="none"></path>
+              </svg>
+            </div>
+            <h4>Kernel</h4>
+            <p>Kernel menentukan bentuk batas pemisah. Linear cocok untuk pola lurus, sedangkan polynomial dan RBF cocok untuk pola yang lebih kompleks.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <line x1="80" y1="10" x2="80" y2="80" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="60" y1="10" x2="60" y2="80" stroke="#94a3b8" stroke-dasharray="6 5" stroke-width="2"></line>
+                <line x1="100" y1="10" x2="100" y2="80" stroke="#94a3b8" stroke-dasharray="6 5" stroke-width="2"></line>
+                <text x="16" y="18" font-size="11" fill="#64748b">margin lebar</text>
+              </svg>
+            </div>
+            <h4>C</h4>
+            <p>Parameter C mengatur seberapa ketat model terhadap kesalahan. C besar membuat model lebih keras terhadap kesalahan, sedangkan C kecil memberi toleransi lebih besar.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <path d="M 12 64 C 36 42, 58 40, 82 44 C 104 48, 122 52, 148 20" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 12 70 C 24 20, 56 84, 86 18 C 108 70, 126 56, 148 14" stroke="#0f172a" stroke-width="4" fill="none"></path>
+                <text x="12" y="16" font-size="11" fill="#64748b">halus</text>
+                <text x="112" y="16" font-size="11" fill="#0f172a">rumit</text>
+              </svg>
+            </div>
+            <h4>Gamma</h4>
+            <p>Gamma mengatur seberapa besar pengaruh satu titik data terhadap bentuk batas keputusan. Gamma kecil menghasilkan batas yang lebih halus, gamma besar membuat batas lebih sensitif.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <path d="M 12 68 Q 80 18 148 68" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 12 68 C 34 14, 60 14, 82 68 C 104 18, 126 18, 148 68" stroke="#0f172a" stroke-width="4" fill="none"></path>
+                <text x="16" y="16" font-size="11" fill="#64748b">degree rendah</text>
+              </svg>
+            </div>
+            <h4>Degree</h4>
+            <p>Degree dipakai pada kernel polynomial. Semakin tinggi degree, bentuk pemisah bisa semakin melengkung dan lebih kompleks.</p>
+          </div>
+        </div>
+      </article>
 
       <article class="demo-card">
         <div class="demo-header">
           <div>
             <h3>Demo interaktif SVM</h3>
-            <p>Ubah kernel, nilai C, dan gamma untuk melihat bagaimana bentuk batas keputusan berubah.</p>
+            <p>Coba ubah parameter di bawah ini untuk melihat perubahan bentuk hyperplane dan margin.</p>
+          </div>
+          <div class="preset-buttons">
+            <button class="preset-btn" data-svm-preset="linear">Preset Linear</button>
+            <button class="preset-btn" data-svm-preset="rbf-soft">Preset RBF Halus</button>
+            <button class="preset-btn" data-svm-preset="rbf-tight">Preset RBF Ketat</button>
           </div>
         </div>
 
@@ -148,7 +225,7 @@
             <path id="svmMargin2" d="" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"></path>
             <text x="18" y="20" fill="#64748b" font-size="12">Kelas A</text>
             <text x="295" y="20" fill="#64748b" font-size="12">Kelas B</text>
-            <text x="135" y="110" fill="#334155" font-size="11">Batas keputusan</text>
+            <text x="136" y="110" fill="#334155" font-size="11">Hyperplane</text>
           </svg>
           <div class="legend">
             <span><span class="dot blue"></span>Titik kelas A</span>
@@ -206,7 +283,7 @@
       <div class="section-heading">
         <h2>2. Decision Tree</h2>
         <p>
-          Decision Tree adalah salah satu model yang paling mudah dipahami karena cara kerjanya mirip seperti serangkaian pertanyaan yang bercabang.
+          Decision Tree adalah model yang paling mudah dibayangkan karena cara kerjanya mirip seperti membuat keputusan melalui pertanyaan-pertanyaan yang bercabang.
         </p>
       </div>
 
@@ -217,23 +294,23 @@
             Decision Tree adalah algoritma machine learning yang membuat keputusan secara bertahap. Model ini membagi data berdasarkan pertanyaan sederhana sampai akhirnya sampai pada satu hasil akhir.
           </p>
           <p>
-            Karena bentuknya seperti pohon, model ini mempunyai tiga bagian utama, yaitu <strong>root node</strong>, <strong>decision node</strong>, dan <strong>leaf node</strong>.
+            Karena bentuknya seperti pohon, algoritma ini mempunyai bagian awal, cabang-cabang keputusan, dan bagian akhir sebagai hasil prediksi.
           </p>
           <div class="note-box soft">
-            Analogi sederhananya seperti permainan tebak-tebakan. Pertanyaan pertama mungkin “apakah petalnya pendek?”, lalu dari situ jawaban akan masuk ke cabang berikutnya.
+            Analogi sederhananya seperti permainan tebak-tebakan. Kamu bertanya satu hal, lalu dari jawaban itu kamu lanjut ke pertanyaan berikutnya, sampai akhirnya mendapat jawaban akhir.
           </div>
         </article>
 
         <article class="card">
-          <h3>Bagian utama pada Decision Tree</h3>
+          <h3>Bagian utama Decision Tree</h3>
           <div class="stack-mini">
             <div class="mini-card">
               <h4>Root node</h4>
-              <p>Titik awal pohon. Semua data mulai dari sini.</p>
+              <p>Titik awal pohon. Semua data masuk dari sini.</p>
             </div>
             <div class="mini-card">
               <h4>Decision node</h4>
-              <p>Tempat model mengajukan pertanyaan, misalnya apakah suatu fitur lebih kecil dari nilai tertentu.</p>
+              <p>Bagian pohon tempat model mengajukan pertanyaan, misalnya apakah suatu fitur lebih kecil dari nilai tertentu.</p>
             </div>
             <div class="mini-card">
               <h4>Leaf node</h4>
@@ -243,38 +320,92 @@
         </article>
       </div>
 
-      <div class="grid grid-3 compact-grid">
-        <article class="mini-card">
-          <h4>Criterion</h4>
-          <p>Digunakan untuk menilai split terbaik. Sederhananya, model mencari pembagian yang membuat kelas semakin rapi.</p>
-        </article>
-        <article class="mini-card">
-          <h4>max_depth</h4>
-          <p>Mengatur seberapa dalam pohon boleh tumbuh. Semakin dalam, aturan makin detail, tetapi risiko overfitting juga meningkat.</p>
-        </article>
-        <article class="mini-card">
-          <h4>min_samples_split</h4>
-          <p>Jumlah minimum data agar sebuah node boleh dipecah lagi menjadi cabang baru.</p>
-        </article>
-        <article class="mini-card">
-          <h4>min_samples_leaf</h4>
-          <p>Jumlah minimum data yang harus ada pada daun agar hasil tidak terlalu ekstrem.</p>
-        </article>
-        <article class="mini-card">
-          <h4>max_features</h4>
-          <p>Jumlah fitur yang dipertimbangkan saat mencari split terbaik.</p>
-        </article>
-        <article class="mini-card">
-          <h4>Splitter</h4>
-          <p>Menentukan cara model memilih split terbaik dari fitur yang tersedia.</p>
-        </article>
-      </div>
+      <article class="card visual-card">
+        <h3>Bagaimana Decision Tree membangun aturan?</h3>
+        <div class="grid grid-3 parameter-grid">
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <rect x="56" y="8" width="48" height="20" rx="10" fill="#dbeafe"></rect>
+                <line x1="80" y1="28" x2="46" y2="56" stroke="#64748b" stroke-width="3"></line>
+                <line x1="80" y1="28" x2="114" y2="56" stroke="#64748b" stroke-width="3"></line>
+                <rect x="18" y="56" width="56" height="18" rx="9" fill="#ecfccb"></rect>
+                <rect x="86" y="56" width="56" height="18" rx="9" fill="#fae8ff"></rect>
+              </svg>
+            </div>
+            <h4>Criterion</h4>
+            <p>Criterion digunakan untuk menilai split terbaik. Intinya, model mencari pembagian yang membuat kelas menjadi lebih rapi.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <circle cx="80" cy="16" r="10" fill="#dbeafe"></circle>
+                <line x1="80" y1="26" x2="80" y2="42" stroke="#64748b" stroke-width="3"></line>
+                <line x1="80" y1="42" x2="48" y2="62" stroke="#64748b" stroke-width="3"></line>
+                <line x1="80" y1="42" x2="112" y2="62" stroke="#64748b" stroke-width="3"></line>
+                <circle cx="48" cy="62" r="8" fill="#bfdbfe"></circle>
+                <circle cx="112" cy="62" r="8" fill="#bfdbfe"></circle>
+              </svg>
+            </div>
+            <h4>max_depth</h4>
+            <p>max_depth mengatur seberapa dalam pohon boleh tumbuh. Semakin dalam, aturan makin detail, tetapi risiko overfitting juga naik.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <rect x="22" y="18" width="18" height="18" fill="#bfdbfe"></rect>
+                <rect x="46" y="18" width="18" height="18" fill="#bfdbfe"></rect>
+                <rect x="70" y="18" width="18" height="18" fill="#bfdbfe"></rect>
+                <rect x="94" y="18" width="18" height="18" fill="#fecaca"></rect>
+                <rect x="118" y="18" width="18" height="18" fill="#fecaca"></rect>
+                <text x="20" y="64" font-size="11" fill="#64748b">berapa data boleh dipecah?</text>
+              </svg>
+            </div>
+            <h4>min_samples_split</h4>
+            <p>Menentukan jumlah minimum data agar sebuah node boleh dipecah lagi menjadi cabang baru.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <circle cx="52" cy="44" r="7" fill="#bfdbfe"></circle>
+                <circle cx="68" cy="44" r="7" fill="#bfdbfe"></circle>
+                <circle cx="84" cy="44" r="7" fill="#bfdbfe"></circle>
+                <circle cx="100" cy="44" r="7" fill="#bfdbfe"></circle>
+              </svg>
+            </div>
+            <h4>min_samples_leaf</h4>
+            <p>Menentukan jumlah minimum data yang harus ada pada daun agar hasil tidak terlalu ekstrem.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <rect x="18" y="22" width="20" height="46" fill="#bfdbfe"></rect>
+                <rect x="46" y="34" width="20" height="34" fill="#bfdbfe"></rect>
+                <rect x="74" y="16" width="20" height="52" fill="#fecaca"></rect>
+                <rect x="102" y="42" width="20" height="26" fill="#bfdbfe"></rect>
+              </svg>
+            </div>
+            <h4>max_features</h4>
+            <p>Menentukan berapa banyak fitur yang dipertimbangkan saat model mencari split terbaik.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <path d="M 22 60 L 52 26 L 82 60" stroke="#64748b" stroke-width="4" fill="none"></path>
+                <path d="M 84 60 L 110 34 L 138 60" stroke="#0f172a" stroke-width="4" fill="none"></path>
+              </svg>
+            </div>
+            <h4>Splitter</h4>
+            <p>Menentukan cara model memilih split. Sederhananya, model bisa mencari split terbaik dari pilihan yang tersedia.</p>
+          </div>
+        </div>
+      </article>
 
       <article class="demo-card">
         <div class="demo-header">
           <div>
             <h3>Demo interaktif Decision Tree</h3>
-            <p>Ubah ciri bunga di bawah ini, lalu lihat bagaimana data melewati cabang demi cabang sampai mendapatkan prediksi.</p>
+            <p>Ubah ciri bunga dan lihat bagaimana data melewati node demi node sampai mendapatkan prediksi akhir.</p>
           </div>
         </div>
 
@@ -301,8 +432,15 @@
           </label>
         </div>
 
-        <div class="tree-flow" id="treeFlow"></div>
-        <div class="result-box" id="treeResult"></div>
+        <div class="grid grid-2 demo-split">
+          <div>
+            <div class="tree-diagram" id="treeDiagram"></div>
+          </div>
+          <div>
+            <div class="tree-flow" id="treeFlow"></div>
+            <div class="result-box" id="treeResult"></div>
+          </div>
+        </div>
       </article>
 
       <div class="grid grid-2">
@@ -330,7 +468,7 @@
       <div class="section-heading">
         <h2>3. Random Forest</h2>
         <p>
-          Random Forest bisa dipahami sebagai gabungan dari banyak Decision Tree. Karena keputusan tidak diambil oleh satu pohon saja, hasilnya biasanya lebih stabil.
+          Random Forest bisa dipahami sebagai kumpulan banyak Decision Tree. Karena keputusan diambil dari banyak pohon, hasil akhirnya biasanya lebih stabil.
         </p>
       </div>
 
@@ -338,59 +476,117 @@
         <article class="card">
           <h3>Apa itu Random Forest?</h3>
           <p>
-            Random Forest adalah algoritma ensemble learning yang menggabungkan banyak Decision Tree. Setiap pohon belajar dari bagian data yang berbeda, lalu semua pohon memberikan prediksi.
+            Random Forest adalah algoritma ensemble learning yang menggabungkan banyak Decision Tree. Setiap pohon belajar dari sebagian data dan sebagian fitur, lalu semua pohon memberikan prediksi.
           </p>
           <p>
             Hasil akhirnya ditentukan dengan <strong>voting</strong>. Artinya, kelas yang paling banyak dipilih oleh pohon-pohon tersebut akan menjadi prediksi akhir.
           </p>
           <div class="note-box soft">
-            Analogi sederhananya seperti bertanya pada banyak orang. Jawaban yang paling banyak muncul dianggap sebagai hasil akhir.
+            Analogi sederhananya seperti bertanya kepada banyak orang. Jawaban yang paling banyak muncul dianggap sebagai keputusan akhir.
           </div>
         </article>
 
         <article class="card">
-          <h3>Kenapa Random Forest lebih stabil?</h3>
-          <p>
-            Satu Decision Tree bisa terlalu mengikuti data latihan. Ketika banyak tree digabungkan, kesalahan dari satu tree bisa ditutupi oleh tree lain. Karena itu, hasil akhir biasanya lebih tahan terhadap overfitting.
-          </p>
-          <p>
-            Jadi, Random Forest memanfaatkan kekuatan banyak pohon agar keputusan akhirnya lebih kuat dan lebih konsisten.
-          </p>
+          <h3>Kenapa Random Forest sering lebih stabil?</h3>
+          <ol class="step-list">
+            <li>Setiap tree belajar dari bagian data yang sedikit berbeda.</li>
+            <li>Setiap tree bisa saja membuat kesalahan kecil yang berbeda-beda.</li>
+            <li>Karena keputusan akhir diambil lewat voting, kesalahan satu tree bisa ditutup oleh tree lain.</li>
+            <li>Akibatnya, model sering lebih tahan terhadap overfitting dibanding satu Decision Tree saja.</li>
+          </ol>
         </article>
       </div>
 
-      <div class="grid grid-3 compact-grid">
-        <article class="mini-card">
-          <h4>n_estimators</h4>
-          <p>Jumlah pohon yang digunakan. Semakin banyak pohon, biasanya hasil makin stabil, tetapi komputasi juga bertambah.</p>
-        </article>
-        <article class="mini-card">
-          <h4>max_depth</h4>
-          <p>Mengatur seberapa dalam tiap pohon boleh tumbuh.</p>
-        </article>
-        <article class="mini-card">
-          <h4>min_samples_split</h4>
-          <p>Jumlah minimum data agar node pada tiap pohon boleh dipecah lagi.</p>
-        </article>
-        <article class="mini-card">
-          <h4>min_samples_leaf</h4>
-          <p>Jumlah minimum data di daun agar hasil tidak terlalu ekstrem.</p>
-        </article>
-        <article class="mini-card">
-          <h4>max_features</h4>
-          <p>Jumlah fitur acak yang dipertimbangkan setiap pohon saat mencari split terbaik.</p>
-        </article>
-        <article class="mini-card">
-          <h4>bootstrap</h4>
-          <p>Menentukan apakah data untuk tiap tree diambil dengan sampling acak yang memungkinkan data terpilih lebih dari sekali.</p>
-        </article>
-      </div>
+      <article class="card visual-card">
+        <h3>Parameter utama Random Forest</h3>
+        <div class="grid grid-3 parameter-grid">
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <circle cx="34" cy="34" r="12" fill="#dbeafe"></circle>
+                <circle cx="80" cy="34" r="12" fill="#dbeafe"></circle>
+                <circle cx="126" cy="34" r="12" fill="#dbeafe"></circle>
+                <rect x="26" y="60" width="16" height="18" fill="#93c5fd"></rect>
+                <rect x="72" y="60" width="16" height="18" fill="#93c5fd"></rect>
+                <rect x="118" y="60" width="16" height="18" fill="#93c5fd"></rect>
+              </svg>
+            </div>
+            <h4>n_estimators</h4>
+            <p>Jumlah pohon yang digunakan. Semakin banyak pohon, biasanya hasil makin stabil, tetapi komputasi juga bertambah.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <line x1="50" y1="74" x2="50" y2="26" stroke="#64748b" stroke-width="4"></line>
+                <line x1="50" y1="34" x2="26" y2="18" stroke="#64748b" stroke-width="4"></line>
+                <line x1="50" y1="34" x2="74" y2="18" stroke="#64748b" stroke-width="4"></line>
+                <line x1="112" y1="74" x2="112" y2="12" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="112" y1="20" x2="86" y2="6" stroke="#0f172a" stroke-width="4"></line>
+                <line x1="112" y1="20" x2="138" y2="6" stroke="#0f172a" stroke-width="4"></line>
+              </svg>
+            </div>
+            <h4>max_depth</h4>
+            <p>Menentukan seberapa dalam tiap pohon boleh tumbuh.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <rect x="18" y="18" width="18" height="18" fill="#93c5fd"></rect>
+                <rect x="42" y="18" width="18" height="18" fill="#93c5fd"></rect>
+                <rect x="66" y="18" width="18" height="18" fill="#93c5fd"></rect>
+                <rect x="90" y="18" width="18" height="18" fill="#fca5a5"></rect>
+                <rect x="114" y="18" width="18" height="18" fill="#fca5a5"></rect>
+              </svg>
+            </div>
+            <h4>min_samples_split</h4>
+            <p>Menentukan jumlah minimum data agar node pada tiap pohon boleh dipecah lagi.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <circle cx="44" cy="48" r="6" fill="#93c5fd"></circle>
+                <circle cx="60" cy="48" r="6" fill="#93c5fd"></circle>
+                <circle cx="76" cy="48" r="6" fill="#93c5fd"></circle>
+                <circle cx="92" cy="48" r="6" fill="#93c5fd"></circle>
+              </svg>
+            </div>
+            <h4>min_samples_leaf</h4>
+            <p>Menentukan jumlah minimum data di leaf agar hasil pohon tidak terlalu ekstrem.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <rect x="18" y="22" width="18" height="44" fill="#93c5fd"></rect>
+                <rect x="42" y="30" width="18" height="36" fill="#fde68a"></rect>
+                <rect x="66" y="14" width="18" height="52" fill="#93c5fd"></rect>
+                <rect x="90" y="38" width="18" height="28" fill="#fde68a"></rect>
+                <rect x="114" y="20" width="18" height="46" fill="#93c5fd"></rect>
+              </svg>
+            </div>
+            <h4>max_features</h4>
+            <p>Menentukan jumlah fitur acak yang dipertimbangkan setiap pohon saat mencari split terbaik.</p>
+          </div>
+          <div class="parameter-card">
+            <div class="parameter-figure">
+              <svg viewBox="0 0 160 90" width="100%" height="90">
+                <rect x="18" y="18" width="20" height="20" fill="#93c5fd"></rect>
+                <rect x="42" y="18" width="20" height="20" fill="#93c5fd"></rect>
+                <rect x="66" y="18" width="20" height="20" fill="#93c5fd"></rect>
+                <rect x="42" y="46" width="20" height="20" fill="#93c5fd"></rect>
+                <rect x="90" y="46" width="20" height="20" fill="#93c5fd"></rect>
+              </svg>
+            </div>
+            <h4>Bootstrap</h4>
+            <p>Menentukan apakah data untuk tiap tree diambil dengan sampling acak yang memungkinkan data terpilih lebih dari sekali.</p>
+          </div>
+        </div>
+      </article>
 
       <article class="demo-card">
         <div class="demo-header">
           <div>
             <h3>Demo interaktif Random Forest</h3>
-            <p>Ubah tingkat kesulitan data dan jumlah tree, lalu lihat bagaimana hasil voting mayoritas bekerja.</p>
+            <p>Ubah tingkat kesulitan data dan jumlah pohon untuk melihat cara voting mayoritas bekerja.</p>
           </div>
         </div>
 
@@ -410,6 +606,7 @@
         </div>
 
         <div class="vote-grid" id="forestVotes"></div>
+        <div class="vote-summary" id="forestSummary"></div>
         <div class="result-box" id="forestResult"></div>
       </article>
 
@@ -434,56 +631,12 @@
       </div>
     </section>
 
-    <section class="section" id="perbandingan">
-      <div class="section-heading">
-        <h2>Perbandingan singkat</h2>
-        <p>Setelah mempelajari tiga model di atas, tabel ini bisa dipakai untuk melihat perbedaannya secara cepat.</p>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Aspek</th>
-              <th>SVM</th>
-              <th>Decision Tree</th>
-              <th>Random Forest</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Ide utama</strong></td>
-              <td>Mencari batas pemisah terbaik</td>
-              <td>Membuat keputusan bercabang</td>
-              <td>Menggabungkan banyak pohon dan voting</td>
-            </tr>
-            <tr>
-              <td><strong>Gambaran paling sederhana</strong></td>
-              <td>Garis pemisah antar kelompok data</td>
-              <td>Serangkaian pertanyaan if-else</td>
-              <td>Rapat banyak pohon untuk memilih jawaban</td>
-            </tr>
-            <tr>
-              <td><strong>Kelebihan utama</strong></td>
-              <td>Kuat pada margin dan bisa menangani non-linier</td>
-              <td>Mudah dipahami</td>
-              <td>Lebih stabil dan tahan overfitting</td>
-            </tr>
-            <tr>
-              <td><strong>Kekurangan utama</strong></td>
-              <td>Perlu tuning parameter</td>
-              <td>Mudah overfitting</td>
-              <td>Lebih berat dan lebih kompleks</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     <section class="section" id="evaluasi">
       <div class="section-heading">
         <h2>Cara membaca hasil evaluasi</h2>
-        <p>Saat menjalankan model, kamu biasanya akan melihat accuracy, precision, recall, F1-score, dan confusion matrix. Berikut arti sederhananya.</p>
+        <p>
+          Setelah model dijalankan, biasanya kamu akan melihat angka seperti accuracy, precision, recall, F1-score, dan confusion matrix. Jangan cuma melihat angkanya besar atau kecil. Pahami juga artinya.
+        </p>
       </div>
 
       <div class="grid grid-2">
@@ -523,7 +676,9 @@
             <div>0</div>
             <div class="cm-diag">11</div>
           </div>
-          <p class="muted-text">Angka di diagonal menunjukkan prediksi yang benar. Kalau ada angka di luar diagonal, artinya model tertukar saat mengenali kelas tertentu.</p>
+          <p class="muted-text">
+            Angka pada diagonal menunjukkan prediksi yang benar. Kalau ada angka di luar diagonal, artinya model tertukar saat mengenali kelas tertentu.
+          </p>
         </article>
       </div>
     </section>
@@ -531,7 +686,7 @@
     <section class="footer-box">
       <h2>Kesimpulan belajar</h2>
       <p>
-        SVM, Decision Tree, dan Random Forest sama-sama digunakan untuk klasifikasi, tetapi mempunyai cara berpikir yang berbeda. Kalau kamu sudah memahami ide dasarnya, maka saat melihat kode, hasil akurasi, atau confusion matrix, semuanya akan terasa jauh lebih masuk akal.
+        SVM, Decision Tree, dan Random Forest sama-sama dipakai untuk klasifikasi, tetapi mempunyai cara berpikir yang berbeda. Kalau kamu sudah memahami ide dasarnya, maka saat melihat kode, hasil akurasi, atau confusion matrix, semuanya akan terasa lebih masuk akal.
       </p>
     </section>
   </main>

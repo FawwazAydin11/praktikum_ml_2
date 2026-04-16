@@ -17,11 +17,13 @@ const gValue = document.getElementById('gValue');
 const svmBoundary = document.getElementById('svmBoundary');
 const svmMargin1 = document.getElementById('svmMargin1');
 const svmMargin2 = document.getElementById('svmMargin2');
+const presetButtons = document.querySelectorAll('[data-svm-preset]');
 
 const petalLength = document.getElementById('petalLength');
 const petalWidth = document.getElementById('petalWidth');
 const treeDepth = document.getElementById('treeDepth');
 const depthValue = document.getElementById('depthValue');
+const treeDiagram = document.getElementById('treeDiagram');
 const treeFlow = document.getElementById('treeFlow');
 const treeResult = document.getElementById('treeResult');
 
@@ -29,36 +31,48 @@ const forestSample = document.getElementById('forestSample');
 const forestTrees = document.getElementById('forestTrees');
 const forestTreesValue = document.getElementById('forestTreesValue');
 const forestVotes = document.getElementById('forestVotes');
+const forestSummary = document.getElementById('forestSummary');
 const forestResult = document.getElementById('forestResult');
 
 function drawInitialPoints() {
   bluePoints.forEach(([x, y]) => {
-    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    c.setAttribute('cx', x);
-    c.setAttribute('cy', y);
-    c.setAttribute('r', 5);
-    c.setAttribute('fill', '#3b82f6');
-    blueGroup.appendChild(c);
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', y);
+    circle.setAttribute('r', 5);
+    circle.setAttribute('fill', '#3b82f6');
+    blueGroup.appendChild(circle);
   });
 
   pinkPoints.forEach(([x, y]) => {
-    const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    r.setAttribute('x', x - 4);
-    r.setAttribute('y', y - 4);
-    r.setAttribute('width', 8);
-    r.setAttribute('height', 8);
-    r.setAttribute('rx', 1.5);
-    r.setAttribute('fill', '#ec4899');
-    pinkGroup.appendChild(r);
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x - 4);
+    rect.setAttribute('y', y - 4);
+    rect.setAttribute('width', 8);
+    rect.setAttribute('height', 8);
+    rect.setAttribute('rx', 1.5);
+    rect.setAttribute('fill', '#ec4899');
+    pinkGroup.appendChild(rect);
   });
 }
 
-function offsetPath(points, offset) {
-  return points.map((p, i) => {
-    if (i === 0 && p.length === 2) return `M ${p[0] + offset} ${p[1]}`;
-    if (p.length === 6) return `C ${p[0] + offset} ${p[1]}, ${p[2] + offset} ${p[3]}, ${p[4] + offset} ${p[5]}`;
-    return `L ${p[0] + offset} ${p[1]}`;
-  }).join(' ');
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function getLinearPath(offset = 0) {
+  return `M ${185 + offset} 16 L ${170 + offset} 204`;
+}
+
+function getPolyPath(offset = 0) {
+  return `M ${194 + offset} 16 C ${178 + offset} 54, ${168 + offset} 94, ${152 + offset} 138 C ${146 + offset} 160, ${138 + offset} 182, ${126 + offset} 204`;
+}
+
+function getRbfPath(offset = 0, gamma = 40) {
+  const curve1 = clamp(54 - Math.round(gamma / 4), 22, 60);
+  const curve2 = clamp(102 + Math.round(gamma / 3), 92, 138);
+  const curve3 = clamp(176 - Math.round(gamma / 4), 138, 184);
+  return `M ${208 + offset} 16 C ${156 + offset} ${curve1}, ${206 + offset} ${curve2}, ${166 + offset} 126 C ${146 + offset} ${curve3}, ${140 + offset} 182, ${126 + offset} 204`;
 }
 
 function updateSVM() {
@@ -69,27 +83,38 @@ function updateSVM() {
   cValue.textContent = c;
   gValue.textContent = gamma;
 
-  let boundaryPoints;
-  let kernelText;
+  let mainPath = '';
+  let kernelText = '';
 
   if (kernel === 'linear') {
-    boundaryPoints = [[185, 15], [170, 205]];
+    mainPath = getLinearPath(0);
     kernelText = 'Kernel linear cocok saat data relatif bisa dipisahkan dengan garis lurus.';
   } else if (kernel === 'poly') {
-    boundaryPoints = [[198, 14, 176, 60, 164, 110], [156, 140, 145, 170, 128, 205]];
+    mainPath = getPolyPath(0);
     kernelText = 'Kernel polynomial membuat batas keputusan lebih melengkung daripada linear.';
   } else {
-    const bend = Math.max(18, Math.round(gamma / 2));
-    boundaryPoints = [[212, 14, 150, 36 + bend, 196, 104], [220, 146, 150, 180, 128, 205]];
+    mainPath = getRbfPath(0, gamma);
     kernelText = 'Kernel RBF sangat fleksibel dan sering dipakai saat pola data tidak linier.';
   }
 
-  const mainPath = offsetPath(boundaryPoints, 0);
-  const margin = Math.max(10, Math.round((100 - c) / 3));
+  const marginShift = Math.max(10, Math.round((100 - c) / 3));
+  let marginPath1 = '';
+  let marginPath2 = '';
+
+  if (kernel === 'linear') {
+    marginPath1 = getLinearPath(marginShift);
+    marginPath2 = getLinearPath(-marginShift);
+  } else if (kernel === 'poly') {
+    marginPath1 = getPolyPath(marginShift);
+    marginPath2 = getPolyPath(-marginShift);
+  } else {
+    marginPath1 = getRbfPath(marginShift, gamma);
+    marginPath2 = getRbfPath(-marginShift, gamma);
+  }
 
   svmBoundary.setAttribute('d', mainPath);
-  svmMargin1.setAttribute('d', offsetPath(boundaryPoints, margin));
-  svmMargin2.setAttribute('d', offsetPath(boundaryPoints, -margin));
+  svmMargin1.setAttribute('d', marginPath1);
+  svmMargin2.setAttribute('d', marginPath2);
 
   const cText = c < 35
     ? 'Nilai C rendah membuat model lebih toleran terhadap beberapa kesalahan pada data latihan, sehingga margin cenderung lebih lebar.'
@@ -109,6 +134,50 @@ function updateSVM() {
     ${cText}<br>
     ${gammaText}<br><br>
     <strong>Inti yang perlu dipahami:</strong> walaupun parameternya berubah, tujuan SVM tetap sama, yaitu mencari batas pemisah yang paling baik antar kelas.
+  `;
+}
+
+function setSvmPreset(type) {
+  if (type === 'linear') {
+    svmKernel.value = 'linear';
+    svmC.value = '55';
+    svmGamma.value = '20';
+  } else if (type === 'rbf-soft') {
+    svmKernel.value = 'rbf';
+    svmC.value = '30';
+    svmGamma.value = '25';
+  } else if (type === 'rbf-tight') {
+    svmKernel.value = 'rbf';
+    svmC.value = '85';
+    svmGamma.value = '80';
+  }
+  updateSVM();
+}
+
+function buildTreeDiagram(prediction, width) {
+  const leftLeafActive = prediction === 'Setosa';
+  const centerLeafActive = prediction === 'Versicolor';
+  const rightLeafActive = prediction === 'Virginica';
+  const rightBranchActive = prediction !== 'Setosa';
+  const wideActive = width === 'lebar' && rightBranchActive;
+  const notWideActive = width !== 'lebar' && rightBranchActive;
+
+  treeDiagram.innerHTML = `
+    <div class="tree-visual-root active">Root: semua data</div>
+    <div class="tree-helper">Pertanyaan 1: apakah petal length pendek?</div>
+    <div class="tree-visual-row two">
+      <div class="tree-visual-node ${leftLeafActive ? 'active' : ''}">Ya</div>
+      <div class="tree-visual-node ${rightBranchActive ? 'active' : ''}">Tidak</div>
+    </div>
+    <div class="tree-visual-row two">
+      <div class="tree-visual-leaf ${leftLeafActive ? 'active' : ''}">Leaf: Setosa</div>
+      <div class="tree-visual-node ${rightBranchActive ? 'active' : ''}">Pertanyaan 2: apakah petal width lebar?</div>
+    </div>
+    <div class="tree-visual-row two">
+      <div class="tree-visual-leaf ${centerLeafActive ? 'active' : ''}">Tidak → Versicolor</div>
+      <div class="tree-visual-leaf ${rightLeafActive ? 'active' : ''}">Ya → Virginica</div>
+    </div>
+    <div class="tree-helper">Cabang yang aktif akan diberi sorotan.</div>
   `;
 }
 
@@ -153,6 +222,8 @@ function updateTree() {
     <strong>Prediksi akhir:</strong> ${prediction}<br>
     ${explanation}
   `;
+
+  buildTreeDiagram(prediction, width);
 }
 
 function generateVotes(sample, numTrees) {
@@ -164,6 +235,31 @@ function generateVotes(sample, numTrees) {
   return source.slice(0, numTrees);
 }
 
+function renderVoteSummary(counts, total) {
+  const classes = ['Setosa', 'Versicolor', 'Virginica'];
+  const classMap = {
+    Setosa: 'setosa',
+    Versicolor: 'versicolor',
+    Virginica: 'virginica'
+  };
+
+  forestSummary.innerHTML = classes.map(label => {
+    const count = counts[label] || 0;
+    const percent = total === 0 ? 0 : (count / total) * 100;
+    return `
+      <div class="summary-bar">
+        <div class="summary-bar-label">
+          <span>${label}</span>
+          <span>${count} suara</span>
+        </div>
+        <div class="summary-track">
+          <div class="summary-fill ${classMap[label]}" style="width: ${percent}%;"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 function updateForest() {
   const sample = forestSample.value;
   const numTrees = Number(forestTrees.value);
@@ -171,9 +267,9 @@ function updateForest() {
   forestTreesValue.textContent = numTrees;
 
   const votes = generateVotes(sample, numTrees);
-  forestVotes.innerHTML = votes.map((vote, i) => `
+  forestVotes.innerHTML = votes.map((vote, index) => `
     <div class="vote-box">
-      <strong>Tree ${i + 1}</strong><br>
+      <strong>Tree ${index + 1}</strong><br>
       ${vote}
     </div>
   `).join('');
@@ -182,6 +278,8 @@ function updateForest() {
   votes.forEach(vote => {
     counts[vote] = (counts[vote] || 0) + 1;
   });
+
+  renderVoteSummary(counts, votes.length);
 
   const winner = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
 
@@ -203,10 +301,19 @@ function updateForest() {
 
 function init() {
   drawInitialPoints();
+  updateSVM();
+  updateTree();
+  updateForest();
 
   svmKernel.addEventListener('change', updateSVM);
   svmC.addEventListener('input', updateSVM);
   svmGamma.addEventListener('input', updateSVM);
+
+  presetButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      setSvmPreset(button.dataset.svmPreset);
+    });
+  });
 
   petalLength.addEventListener('change', updateTree);
   petalWidth.addEventListener('change', updateTree);
@@ -214,10 +321,6 @@ function init() {
 
   forestSample.addEventListener('change', updateForest);
   forestTrees.addEventListener('input', updateForest);
-
-  updateSVM();
-  updateTree();
-  updateForest();
 }
 
 init();
