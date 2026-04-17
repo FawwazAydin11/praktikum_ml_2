@@ -573,3 +573,11 @@ body {
     font-size: 1.6rem;
   }
 }
+
+.content-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 16px;
+}
