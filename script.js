@@ -104,13 +104,13 @@ function updateSVM() {
 
   if (kernel === 'linear') {
     mainPath = getLinearPath(0);
-    kernelText = 'Kernel linear cocok saat data relatif bisa dipisahkan dengan garis lurus.';
+    kernelText = 'Sekarang model memakai kernel linear. Artinya, model mencoba memisahkan data dengan batas yang lurus.';
   } else if (kernel === 'poly') {
     mainPath = getPolyPath(0, degree);
-    kernelText = 'Kernel polynomial membuat batas keputusan lebih melengkung daripada linear. Degree menentukan seberapa kompleks lengkungannya.';
+    kernelText = 'Sekarang model memakai kernel polynomial. Batas pemisahnya jadi lebih melengkung, dan degree membantu menentukan seberapa rumit lengkungannya.';
   } else {
     mainPath = getRbfPath(0, gamma);
-    kernelText = 'Kernel RBF sangat fleksibel dan sering dipakai saat pola data tidak linier.';
+    kernelText = 'Sekarang model memakai kernel RBF. Kernel ini lebih fleksibel, jadi cocok saat pola data tidak bisa dipisahkan dengan garis lurus sederhana.';
   }
 
   const marginShift = Math.max(10, Math.round((100 - c) / 3));
@@ -133,19 +133,19 @@ function updateSVM() {
   svmMargin2.setAttribute('d', marginPath2);
 
   const cText = c < 35
-    ? 'Nilai C rendah membuat model lebih toleran terhadap beberapa kesalahan pada data latihan, sehingga margin cenderung lebih lebar.'
+    ? 'Nilai C saat ini cenderung rendah, jadi model masih cukup toleran terhadap beberapa kesalahan dan margin biasanya terasa lebih longgar.'
     : c < 70
-    ? 'Nilai C sedang memberi keseimbangan antara margin yang cukup lebar dan usaha memisahkan data dengan baik.'
-    : 'Nilai C tinggi membuat model lebih ketat agar data latihan terpisah sebaik mungkin, tetapi margin bisa menjadi lebih sempit.';
+    ? 'Nilai C saat ini berada di tengah, jadi model mencoba menyeimbangkan margin yang cukup aman dengan usaha memisahkan data dengan baik.'
+    : 'Nilai C saat ini cukup tinggi, jadi model lebih ketat dan berusaha keras agar data latihan terpisah sebaik mungkin.';
 
   const gammaText = gamma < 35
-    ? 'Gamma rendah membuat batas keputusan lebih halus dan lebih umum.'
+    ? 'Gamma saat ini rendah, jadi model melihat pola secara lebih luas dan batas keputusannya cenderung lebih halus.'
     : gamma < 70
-    ? 'Gamma sedang membuat model cukup fleksibel mengikuti pola data.'
-    : 'Gamma tinggi membuat model sangat sensitif terhadap pola di sekitar titik data.';
+    ? 'Gamma saat ini sedang, jadi model cukup peka terhadap bentuk data tanpa terlalu berlebihan pada detail kecil.'
+    : 'Gamma saat ini tinggi, jadi model lebih sensitif terhadap titik-titik di sekitar batas dan bentuknya bisa menjadi lebih detail.';
 
   const degreeText = kernel === 'poly'
-    ? `<br>Degree saat ini adalah ${degree}. Semakin tinggi degree, kurva polynomial bisa menjadi semakin kompleks.`
+    ? `<br>Degree saat ini adalah ${degree}. Semakin besar nilainya, kurva polynomial bisa menjadi semakin kompleks.`
     : '';
 
   if (svmResult) {
@@ -154,7 +154,7 @@ function updateSVM() {
       ${kernelText}<br>
       ${cText}<br>
       ${gammaText}${degreeText}<br><br>
-      <strong>Inti yang perlu dipahami:</strong> walaupun parameternya berubah, tujuan SVM tetap sama, yaitu mencari batas pemisah yang paling baik antar kelas.
+      <strong>Inti yang perlu diperhatikan:</strong> walaupun parameternya berubah, tujuan SVM tetap sama, yaitu mencari batas pemisah yang paling baik antar kelas.
     `;
   }
 }
@@ -191,8 +191,6 @@ function buildTreeDiagram(prediction, width) {
   if (!treeDiagram) return;
 
   const setosaActive = prediction === 'Setosa';
-  const versicolorActive = prediction === 'Versicolor';
-  const virginicaActive = prediction === 'Virginica';
   const rightBranchActive = prediction !== 'Setosa';
   const wideActive = width === 'lebar' && rightBranchActive;
   const notWideActive = width !== 'lebar' && rightBranchActive;
@@ -212,7 +210,7 @@ function buildTreeDiagram(prediction, width) {
       <div class="tree-visual-leaf ${notWideActive ? 'active' : ''}">Tidak → Versicolor</div>
       <div class="tree-visual-leaf ${wideActive ? 'active' : ''}">Ya → Virginica</div>
     </div>
-    <div class="tree-helper">Cabang yang aktif akan diberi sorotan.</div>
+    <div class="tree-helper">Cabang yang aktif diberi sorotan supaya alurnya lebih mudah diikuti.</div>
   `;
 }
 
@@ -221,24 +219,24 @@ function updateTree() {
 
   const length = petalLength.value;
   const width = petalWidth.value;
-  const steps = ['Root node: semua data mulai dari sini'];
+  const steps = ['Root node: semua data mulai dari sini.'];
   let prediction = '';
   let explanation = '';
 
   if (length === 'pendek') {
-    steps.push('Decision node: apakah petal length pendek? Ya');
+    steps.push('Decision node: apakah petal length pendek? Ya.');
     prediction = 'Setosa';
-    explanation = 'Karena petalnya pendek, data ini langsung mengarah ke kelas Setosa.';
+    explanation = 'Karena petalnya pendek, model langsung mengarah ke kelas Setosa.';
   } else {
-    steps.push('Decision node: apakah petal length pendek? Tidak');
+    steps.push('Decision node: apakah petal length pendek? Tidak.');
     if (width === 'lebar') {
-      steps.push('Decision node: apakah petal width lebar? Ya');
+      steps.push('Decision node: apakah petal width lebar? Ya.');
       prediction = 'Virginica';
-      explanation = 'Karena petal cukup besar, data lebih dekat ke kelas Virginica.';
+      explanation = 'Karena petalnya tidak pendek dan lebarnya cenderung besar, model lebih dekat ke kelas Virginica.';
     } else {
-      steps.push('Decision node: apakah petal width lebar? Tidak');
+      steps.push('Decision node: apakah petal width lebar? Tidak.');
       prediction = 'Versicolor';
-      explanation = 'Karena nilainya berada di tengah, data lebih dekat ke kelas Versicolor.';
+      explanation = 'Karena petalnya tidak pendek tetapi juga tidak terlalu lebar, model lebih dekat ke kelas Versicolor.';
     }
   }
 
@@ -323,11 +321,11 @@ function updateForest() {
 
   let note = '';
   if (sample === 'mudah') {
-    note = 'Saat datanya mudah, hampir semua tree cenderung sepakat.';
+    note = 'Karena datanya mudah, hampir semua tree cenderung sepakat pada kelas yang sama.';
   } else if (sample === 'sulit') {
-    note = 'Saat datanya ambigu, beberapa tree bisa berbeda pendapat. Di sinilah voting mayoritas menjadi penting.';
+    note = 'Karena datanya lebih ambigu, beberapa tree bisa berbeda pendapat. Di sinilah voting mayoritas menjadi penting.';
   } else {
-    note = 'Saat data berada di tengah, hasil voting membantu membuat keputusan lebih stabil.';
+    note = 'Saat data berada di tengah, hasil voting membantu membuat keputusan akhir menjadi lebih stabil.';
   }
 
   if (forestResult) {
